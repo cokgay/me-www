@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300..800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --background: #160710;
+  --background-2: #250c1b;
+  --background-3: #351227;
+  --background-4: #571e40;
+  --border-1: #491936;
+  --foreground: #fff6ff;
+}
+
+::placeholder {
+  color: var(--foreground);
+  opacity: 75%;
+}
+
+a {
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+hr {
+  border: var(--border-1) dashed 1px;
+  margin: 8px 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='url'],
+textarea {
+  color: var(--foreground);
+  background-color: var(--background-3);
+
+  border: var(--border-1) solid 1px;
+  border-radius: 8px;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 8px;
+}
+
+textarea {
+  resize: vertical;
+  height: 128px;
+}
+
+input[type='checkbox'] {
+  width: 16px;
+  aspect-ratio: 1;
+}
+
+input,
+button,
+select {
+  accent-color: var(--border-1);
+}
+
+input,
+textarea,
+button,
+select {
+  font-family: inherit;
+  font-size: 16px;
+}
+
+button {
+  color: var(--foreground);
+}
+
+.button,
+button {
+  text-align: center;
+
+  border: var(--border-1) solid 1px;
+  border-radius: 8px;
+
+  background-color: var(--background-3);
+
+  padding: 6px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+*:focus {
+  z-index: 1;
+  outline: var(--border-1) solid 2px;
+}
+
+:where(.button, input, button).close {
+  background-color: transparent;
+  border: none;
+
+  padding: 6px;
+}
+
+:where(.button, input, button).close:hover {
+  text-decoration: none;
+}
+
+:where(.button, button, input):disabled {
+  pointer-events: none;
+  filter: brightness(75%);
+  cursor: not-allowed;
+}
+
+:where(.button, button):hover {
+  background-color: var(--border-1);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+select {
+  color: #fff6ff;
+
+  background-color: var(--background-3);
+
+  border: var(--border-1) solid 1px;
+  border-radius: 8px;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+
+  color: var(--foreground);
+  background-color: var(--background);
+
+  height: 100vh;
+  display: flex;
+}
+
+div#app {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: auto;
+}
+
+.box {
+  background-color: var(--background-2);
+
+  border: var(--border-1) solid 1px;
+  border-radius: 8px;
+}
+
+.box.centered {
+  width: 576px;
+  padding: 12px;
+}
+
+.box.toast {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  width: 576px;
+  padding: 12px;
+}
+
+@media only screen and (max-width: 640px) {
+  .box.centered {
+    width: inherit;
+
+    border: none;
+    border-radius: 0;
+  }
+}
