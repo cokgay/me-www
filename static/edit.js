@@ -20,7 +20,8 @@ const allDisplays = [
   'Website',
   'Youtube',
 ];
-const form = document.querySelector("form[action='/user/update']");
+
+const form = document.querySelector("form[action='/edit']");
 
 const aboutTextarea = document.querySelector("textarea[name='about']");
 const lanyardIdInput = document.querySelector("input[name='lanyard-id']");
@@ -38,7 +39,7 @@ window.onload = async () => {
   const userData = await getUserData(token);
   if (userData) {
     aboutTextarea.textContent = userData.about ?? '';
-    lanyardIdInput.value = userData.lanyard_id ?? '';
+    lanyardIdInput.value = userData.lanyardId ?? '';
     themeSelect.value = userData.theme ?? 'ArtBox';
 
     userData.links.forEach((link) => {
@@ -83,12 +84,12 @@ submitButton.onclick = submitButton.onsubmit = async (b) => {
 
   const data = {
     about: aboutMe.value,
-    lanyard_id: lanyardId.value,
+    lanyardId: lanyardId.value,
     theme: theme.value,
     links,
   };
 
-  const result = await fetch('/user/update', {
+  const result = await fetch(form.action, {
     method: 'PATCH',
     body: JSON.stringify({
       token: localStorage.getItem('token'),
@@ -109,7 +110,7 @@ async function getUserData(token) {
   else if (typeof token !== 'string')
     return createToast('Token value is broken. Please clear website data and try again.');
 
-  const response = await fetch(`/user/about?token=${token}`, {
+  const response = await fetch(`/about?token=${token}`, {
     method: 'GET',
   });
 

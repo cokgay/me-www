@@ -1,6 +1,6 @@
 import { createToast } from '/static/utils.js';
 
-const form = document.querySelector('form[action="/user/create"]');
+const form = document.querySelector('form[action="/sign-up"]');
 const submitButton = document.querySelector("button[type='submit']");
 const captcha = document.querySelector('div.cf-turnstile');
 

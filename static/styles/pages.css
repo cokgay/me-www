@@ -26,7 +26,7 @@ label.loginDirectlyCheckbox {
 /* sign-up.html END */
 
 /* edit.html START */
-form[action='/user/update'] {
+form[action='/edit'] {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
 }
