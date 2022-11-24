@@ -1,0 +1,10 @@
+<!-- https://github.com/cokdotgay/me-templates -->
+
+{% match theme %}
+{% when "ArtBox" %}
+{% include "themes/artbox.html" %}
+{% when "Black" %}
+{% include "themes/black.html" %}
+{% else %}
+This is an unreachable page. If you see this somehow, please contact with us.
+{% endmatch %}
