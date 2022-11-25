@@ -374,7 +374,7 @@
       let returned = await result.json();
 
       let { username, discriminator, avatar } = returned.data.discord_user;
-      let format = avatar.startsWith("a_") ? "gif" : "png";
+      let format = avatar.startsWith("a_") ? "gif" : "webp";
 
       avatarElement.src = `https://cdn.discordapp.com/avatars/${id}/${avatar}.${format}`;
 
