@@ -1,351 +1,354 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ username }}</title>
-  <meta content="website" property="og:type" />
-  <meta content="{{ username }}" property="og:title" />
-  <meta content="{{ about }}" property="og:description" />
-  <meta content="{{ username }}" property="og:site_name" />
-  <meta name="description" content="{{ about }}" />
-  <meta name="robots" content="index, follow" />
-  <meta name="title" content="{{ username }}" />
-  <meta name="author" content="https://me.cok.gay/" />
-  <link rel="shortcut icon" href="https://raw.githubusercontent.com/cokdotgay/icons/main/webp/cokdotgay-nobg.webp"
-    type="image/x-icon" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap"
-    rel="stylesheet" />
-  <style>
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-
-      font-family: 'Montserrat', sans-serif;
-
-      text-align: center;
-      overflow: hidden;
-    }
-
-    body {
-      background: url(https://4kwallpapers.com/images/wallpapers/macos-ventura-macos-13-macos-2022-stock-dark-mode-5k-retina-5120x2880-8133.jpg);
-      background-size: cover;
-      background-position: center;
-    }
-
-    #status {
-      position: fixed;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-sizing: border-box;
-
-      width: 100%;
-      height: 22px;
-      padding: 16px;
-      backdrop-filter: blur(100px);
-      -webkit-backdrop-filter: blur(100px);
-
-      background: #0e0e0e52;
-
-      top: 0;
-      left: 0;
-      z-index: 1;
-    }
-
-    #status div {
-      display: flex;
-      align-items: center;
-    }
-
-    #status div h1 {
-      color: #ffffff;
-
-      font-weight: 700;
-      font-size: 12px;
-      margin-left: 18px;
-    }
-
-    #status div svg {
-      fill: #ffffff;
-
-      width: 18px;
-    }
-
-    #status p {
-      color: #ffffff;
-
-      font-weight: 600;
-      font-size: 12px;
-    }
-
-    #window {
-      position: absolute;
-      border-radius: 12px;
-      backdrop-filter: blur(40px);
-
-      background: #0e0e0e2f;
-      box-shadow: #00000071 0px 50px 100px -20px, #000000bb 0px 30px 60px -30px,
-        #00000052 0px 0px 0px 2px, #c9c9c9c4 0px 0px 0px 1px;
-    }
-
-    #window #upper {
-      display: flex;
-      align-items: center;
-      box-sizing: border-box;
-
-      width: 100%;
-      height: 38px;
-      padding: 10px;
-    }
-
-    #window #upper div {
-      border-radius: 50%;
-      width: 16px;
-      height: 16px;
-      margin-right: 10px;
-
-      background: #e7e7e75d;
-    }
-
-    #window #upper div:first-child {
-      background: #ff453a;
-    }
-
-    #window #bottom {
-      display: flex;
-      justify-content: center;
-      overflow: auto;
-      box-sizing: border-box;
-
-      width: 100%;
-      max-height: 512px;
-      padding: 20px 40px 20px 40px;
-    }
-
-    #window #bottom #avatar {
-      display: none;
-      object-fit: cover;
-
-      margin: 20px;
-      width: 156px;
-      height: 156px;
-      border-radius: 50%;
-
-      border: 6px solid #ffffff00;
-    }
-
-    #window #bottom #user {
-      text-align: left;
-
-      margin: 20px;
-      max-width: 256px;
-    }
-
-    #window #bottom #user h1,
-    #window #bottom #user p {
-      word-break: break-all;
-      white-space: pre-wrap;
-
-      margin: 4px;
-
-      color: #dedede;
-    }
-
-    #window #bottom #user p {
-      font-weight: 500;
-    }
-
-    #window #bottom #user #links {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-
-      border-radius: 10px;
-      width: 100%;
-      margin: 4px;
-    }
-
-    #window #bottom #user #links a {
-      display: block;
-      margin: 5px 10px 5px 0px;
-    }
-
-    #window #bottom #user #links a img {
-      filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(43deg) brightness(102%) contrast(101%);
-
-      width: 24px;
-      height: 24px;
-    }
-
-    @media (max-width: 900px) {
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ username }}</title>
+    <meta content="website" property="og:type" />
+    <meta content="{{ username }}" property="og:title" />
+    <meta content="{{ about }}" property="og:description" />
+    <meta content="{{ username }}" property="og:site_name" />
+    <meta name="description" content="{{ about }}" />
+    <meta name="robots" content="index, follow" />
+    <meta name="title" content="{{ username }}" />
+    <meta name="author" content="https://me.cok.gay/" />
+    <link
+      rel="shortcut icon"
+      href="https://raw.githubusercontent.com/cokdotgay/icons/main/webp/cokdotgay-nobg.webp"
+      type="image/x-icon"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
       html,
       body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+
+        font-family: 'Montserrat', sans-serif;
+
+        text-align: center;
+        overflow: hidden;
+      }
+
+      body {
+        background: url(https://4kwallpapers.com/images/wallpapers/macos-ventura-macos-13-macos-2022-stock-dark-mode-5k-retina-5120x2880-8133.jpg);
+        background-size: cover;
+        background-position: center;
       }
 
       #status {
-        display: none;
+        position: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-sizing: border-box;
+
+        width: 100%;
+        height: 22px;
+        padding: 16px;
+        backdrop-filter: blur(100px);
+        -webkit-backdrop-filter: blur(100px);
+
+        background: #0e0e0e52;
+
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
+
+      #status div {
+        display: flex;
+        align-items: center;
+      }
+
+      #status div h1 {
+        color: #ffffff;
+
+        font-weight: 700;
+        font-size: 12px;
+        margin-left: 18px;
+      }
+
+      #status div svg {
+        fill: #ffffff;
+
+        width: 18px;
+      }
+
+      #status p {
+        color: #ffffff;
+
+        font-weight: 600;
+        font-size: 12px;
       }
 
       #window {
-        display: unset;
-        position: unset;
+        position: absolute;
+        border-radius: 12px;
+        backdrop-filter: blur(40px);
+
+        background: #0e0e0e2f;
+        box-shadow: #00000071 0px 50px 100px -20px, #000000bb 0px 30px 60px -30px,
+          #00000052 0px 0px 0px 2px, #c9c9c9c4 0px 0px 0px 1px;
       }
 
-      #window #bottom {
-        flex-wrap: wrap;
+      #window #upper {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+
+        width: 100%;
+        height: 38px;
         padding: 10px;
       }
 
-      #window #bottom #avatar {
-        width: 128px;
-        height: 128px;
+      #window #upper div {
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+
+        background: #e7e7e75d;
       }
 
-      #window #bottom #user h1 {
-        font-size: 24px;
+      #window #upper div:first-child {
+        background: #ff453a;
+      }
+
+      #window #bottom {
+        display: flex;
+        justify-content: center;
+        overflow: auto;
+        box-sizing: border-box;
+
+        width: 100%;
+        max-height: 512px;
+        padding: 20px 40px 20px 40px;
+      }
+
+      #window #bottom #avatar {
+        display: none;
+        object-fit: cover;
+
+        margin: 20px;
+        width: 156px;
+        height: 156px;
+        border-radius: 50%;
+
+        border: 6px solid #ffffff00;
+      }
+
+      #window #bottom #user {
+        text-align: left;
+
+        margin: 20px;
+        max-width: 256px;
+      }
+
+      #window #bottom #user h1,
+      #window #bottom #user p {
+        word-break: break-all;
+        white-space: pre-wrap;
+
+        margin: 4px;
+
+        color: #dedede;
       }
 
       #window #bottom #user p {
-        font-size: 16px;
+        font-weight: 500;
       }
-    }
 
-    * {
-      scrollbar-width: thin;
-      scrollbar-color: #c9c9c9c4;
+      #window #bottom #user #links {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
 
-      -webkit-user-select: none;
-      user-select: none;
-    }
+        border-radius: 10px;
+        width: 100%;
+        margin: 4px;
+      }
 
-    *::-webkit-scrollbar {
-      width: 6px;
-    }
+      #window #bottom #user #links a {
+        display: block;
+        margin: 5px 10px 5px 0px;
+      }
 
-    *::-webkit-scrollbar-track {
-      background: transparent;
-    }
+      #window #bottom #user #links a img {
+        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(43deg) brightness(102%)
+          contrast(101%);
 
-    *::-webkit-scrollbar-thumb {
-      background-color: #c9c9c9c4;
-      border-radius: 20px;
-    }
+        width: 24px;
+        height: 24px;
+      }
 
-  </style>
-</head>
+      @media (max-width: 900px) {
+        html,
+        body {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
 
-<body>
-  <div id="status">
-    <div>
-      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <title>Apple</title>
-        <path
-          d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701" />
-      </svg>
-      <h1>{{ username }}</h1>
-    </div>
-    <p id="date"></p>
-  </div>
-  <div id="window">
-    <div id="upper">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div id="bottom">
-      <img src="" alt="avatar" id="avatar" />
-      <div id="user">
+        #status {
+          display: none;
+        }
+
+        #window {
+          display: unset;
+          position: unset;
+        }
+
+        #window #bottom {
+          flex-wrap: wrap;
+          padding: 10px;
+        }
+
+        #window #bottom #avatar {
+          width: 128px;
+          height: 128px;
+        }
+
+        #window #bottom #user h1 {
+          font-size: 24px;
+        }
+
+        #window #bottom #user p {
+          font-size: 16px;
+        }
+      }
+
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: #c9c9c9c4;
+
+        -webkit-user-select: none;
+        user-select: none;
+      }
+
+      *::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      *::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      *::-webkit-scrollbar-thumb {
+        background-color: #c9c9c9c4;
+        border-radius: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="status">
+      <div>
+        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <title>Apple</title>
+          <path
+            d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"
+          />
+        </svg>
         <h1>{{ username }}</h1>
-        <p>{{ about }}</p>
-        <div id="links">
-          {% for link in links %}
-          <a href="{{ link.url }}" class="{{ link.display }}" title="{{ link.title }}">
-            <img src="/static/icons/{{ link.display|lower }}.svg" alt="{{ link.title }}" />
-          </a>
-          {% endfor %}
+      </div>
+      <p id="date"></p>
+    </div>
+    <div id="window">
+      <div id="upper">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div id="bottom">
+        <img src="" alt="avatar" id="avatar" />
+        <div id="user">
+          <h1>{{ username }}</h1>
+          <p>{{ about }}</p>
+          <div id="links">
+            {% for link in links %}
+            <a href="{{ link.url }}" class="{{ link.display }}" title="{{ link.title }}">
+              <img src="/static/icons/{{ link.display|lower }}.svg" alt="{{ link.title }}" />
+            </a>
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <script src="/static/lanyard.js"></script>
-  <script>
-    let macWindow = document.getElementById('window');
-    let dateElem = document.getElementById('date');
+    <script src="/static/lanyard.js"></script>
+    <script>
+      let macWindow = document.getElementById('window');
+      let dateElem = document.getElementById('date');
 
-    dateElem.innerText = new Date().toDateString();
+      dateElem.innerText = new Date().toDateString();
 
-    const centerWindow = () => {
-      macWindow.style.left = `${window.innerWidth / 2 - macWindow.offsetWidth / 2}px`;
-      macWindow.style.top = `${window.innerHeight / 2 - macWindow.offsetHeight / 2}px`;
-    };
+      const centerWindow = () => {
+        macWindow.style.left = `${window.innerWidth / 2 - macWindow.offsetWidth / 2}px`;
+        macWindow.style.top = `${window.innerHeight / 2 - macWindow.offsetHeight / 2}px`;
+      };
 
-    const dragElement = () => {
-      let pos1 = 0,
-        pos2 = 0,
-        pos3 = 0,
-        pos4 = 0;
+      const dragElement = () => {
+        let pos1 = 0,
+          pos2 = 0,
+          pos3 = 0,
+          pos4 = 0;
 
-      macWindow.onmousedown = (e) => {
-        e.preventDefault();
-
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-
-        document.onmouseup = () => {
-          document.onmouseup = null;
-          document.onmousemove = null;
-        };
-
-        document.onmousemove = (e) => {
+        macWindow.onmousedown = (e) => {
           e.preventDefault();
 
-          pos1 = pos3 - e.clientX;
-          pos2 = pos4 - e.clientY;
           pos3 = e.clientX;
           pos4 = e.clientY;
 
-          macWindow.style.top = macWindow.offsetTop - pos2 + 'px';
-          macWindow.style.left = macWindow.offsetLeft - pos1 + 'px';
+          document.onmouseup = () => {
+            document.onmouseup = null;
+            document.onmousemove = null;
+          };
+
+          document.onmousemove = (e) => {
+            e.preventDefault();
+
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+
+            macWindow.style.top = macWindow.offsetTop - pos2 + 'px';
+            macWindow.style.left = macWindow.offsetLeft - pos1 + 'px';
+          };
         };
       };
-    };
 
-    initializeLanyard('{{ lanyard_id }}', async (id, { discord_user, discord_status }) => {
-      const styles = {
-        online: '#30d158',
-        offline: '#8e8e93',
-        idle: '#ffd60a',
-        dnd: '#ff453a',
-      };
+      initializeLanyard('{{ lanyard_id }}', async (id, { discord_user, discord_status }) => {
+        const styles = {
+          online: '#30d158',
+          offline: '#8e8e93',
+          idle: '#ffd60a',
+          dnd: '#ff453a',
+        };
 
-      const { avatar } = discord_user;
-      const format = avatar.startsWith('a_') ? 'gif' : 'webp';
+        const { avatar } = discord_user;
+        const format = avatar.startsWith('a_') ? 'gif' : 'webp';
 
-      let avatarElement = document.getElementById('avatar');
+        let avatarElement = document.getElementById('avatar');
 
-      avatarElement.style.display = 'block';
-      avatarElement.src = `https://cdn.discordapp.com/avatars/${id}/${avatar}.${format}`;
-      avatarElement.style.borderColor = styles[discord_status];
+        avatarElement.style.display = 'block';
+        avatarElement.src = `https://cdn.discordapp.com/avatars/${id}/${avatar}.${format}`;
+        avatarElement.style.borderColor = styles[discord_status];
 
-      centerWindow();
-    });
+        centerWindow();
+      });
 
-    if (window.innerWidth >= 900) {
-      dragElement();
-      centerWindow();
-    }
-  </script>
-</body>
-
+      if (window.innerWidth >= 900) {
+        dragElement();
+        centerWindow();
+      }
+    </script>
+  </body>
 </html>
