@@ -114,32 +114,25 @@
         {% endfor %}
       </div>
     </div>
+    <script src="/static/lanyard.js"></script>
     <script>
-      let avatarElement = document.getElementById('avatar');
+      initializeLanyard('{{ lanyard_id }}', async (id, { discord_user, discord_status }) => {
+        const styles = {
+          online: '#00ff00',
+          offline: '#cccccc',
+          idle: '#ffbd2f',
+          dnd: '#ff3640',
+        };
 
-      const api = 'https://api.lanyard.rest/v1/users';
-      const id = '{{ lanyard_id }}';
+        const { username, discriminator, avatar } = discord_user;
+        const format = avatar.startsWith('a_') ? 'gif' : 'webp';
 
-      const styles = {
-        online: '#00ff00',
-        offline: '#cccccc',
-        idle: '#ffbd2f',
-        dnd: '#ff3640',
-      };
-
-      const initialize = async () => {
-        let result = await fetch(`${api}/${id}`);
-        let returned = await result.json();
-
-        let { username, discriminator, avatar } = returned.data.discord_user;
-        let format = avatar.startsWith('a_') ? 'gif' : 'webp';
+        let avatarElement = document.getElementById('avatar');
 
         avatarElement.style.display = 'inline';
         avatarElement.src = `https://cdn.discordapp.com/avatars/${id}/${avatar}.${format}`;
-        avatarElement.style.borderColor = styles[returned.data.discord_status];
-      };
-
-      initialize();
+        avatarElement.style.borderColor = styles[discord_status];
+      });
     </script>
   </body>
 </html>

@@ -362,38 +362,31 @@
         <a href="/edit" id="bottom"> Edit&nbsp;Your&nbsp;Profile </a>
       </div>
     </div>
+    <script src="/static/lanyard.js"></script>
     <script>
-      let usernameElement = document.getElementById('username');
-      let avatarElement = document.getElementById('avatar');
-      let infoElement = document.getElementById('upper');
+      initializeLanyard('{{ lanyard_id }}', async (id, { discord_user, discord_status }) => {
+        const styles = {
+          online: '#36be1b',
+          offline: '#cccccc',
+          idle: '#ffbd2f',
+          dnd: '#ff3640',
+        };
 
-      const api = 'https://api.lanyard.rest/v1/users';
-      const id = '{{ lanyard_id }}';
+        const { username, discriminator, avatar } = discord_user;
+        const format = avatar.startsWith('a_') ? 'gif' : 'webp';
 
-      const styles = {
-        online: '#36be1b',
-        offline: '#cccccc',
-        idle: '#ffbd2f',
-        dnd: '#ff3640',
-      };
-
-      const initialize = async () => {
-        let result = await fetch(`${api}/${id}`);
-        let returned = await result.json();
-
-        let { username, discriminator, avatar } = returned.data.discord_user;
-        let format = avatar.startsWith('a_') ? 'gif' : 'webp';
+        let usernameElement = document.getElementById('username');
+        let avatarElement = document.getElementById('avatar');
+        let infoElement = document.getElementById('upper');
 
         avatarElement.src = `https://cdn.discordapp.com/avatars/${id}/${avatar}.${format}`;
 
-        infoElement.style.borderColor = styles[returned.data.discord_status];
+        infoElement.style.borderColor = styles[discord_status];
         infoElement.style.display = 'flex';
 
         usernameElement.innerText = `${username}#${discriminator}`;
         usernameElement.href = `https://discord.com/users/${id}`;
-      };
-
-      initialize();
+      });
     </script>
   </body>
 </html>

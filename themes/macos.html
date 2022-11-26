@@ -282,19 +282,18 @@
         </div>
       </div>
     </div>
+    <script src="/static/lanyard.js"></script>
     <script>
-      // date
-      document.getElementById('date').innerText = new Date().toDateString();
-
       let macWindow = document.getElementById('window');
+      let dateElem = document.getElementById('date');
 
-      // centerize window
+      dateElem.innerText = new Date().toDateString();
+
       const centerWindow = () => {
         macWindow.style.left = `${window.innerWidth / 2 - macWindow.offsetWidth / 2}px`;
         macWindow.style.top = `${window.innerHeight / 2 - macWindow.offsetHeight / 2}px`;
       };
 
-      // drag function
       const dragElement = () => {
         let pos1 = 0,
           pos2 = 0,
@@ -326,36 +325,30 @@
         };
       };
 
-      // lanyard
-      let avatarElement = document.getElementById('avatar');
+      initializeLanyard('{{ lanyard_id }}', async (id, { discord_user, discord_status }) => {
+        const styles = {
+          online: '#30d158',
+          offline: '#8e8e93',
+          idle: '#ffd60a',
+          dnd: '#ff453a',
+        };
 
-      const api = 'https://api.lanyard.rest/v1/users';
-      const id = '{{ lanyard_id }}';
+        const { avatar } = discord_user;
+        const format = avatar.startsWith('a_') ? 'gif' : 'webp';
 
-      const styles = {
-        online: '#30d158',
-        offline: '#8e8e93',
-        idle: '#ffd60a',
-        dnd: '#ff453a',
-      };
-
-      const initializeLanyard = async () => {
-        let result = await fetch(`${api}/${id}`);
-        let returned = await result.json();
-
-        let { username, discriminator, avatar } = returned.data.discord_user;
-        let format = avatar.startsWith('a_') ? 'gif' : 'webp';
+        let avatarElement = document.getElementById('avatar');
 
         avatarElement.style.display = 'block';
         avatarElement.src = `https://cdn.discordapp.com/avatars/${id}/${avatar}.${format}`;
-        avatarElement.style.borderColor = styles[returned.data.discord_status];
+        avatarElement.style.borderColor = styles[discord_status];
 
         centerWindow();
-      };
+      });
 
-      initializeLanyard();
-      centerWindow();
-      if (window.innerWidth >= 900) dragElement();
+      if (window.innerWidth >= 900) {
+        dragElement();
+        centerWindow();
+      }
     </script>
   </body>
 </html>
