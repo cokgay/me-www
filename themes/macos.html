@@ -44,17 +44,20 @@
       }
 
       #status {
+        position: fixed;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        box-sizing: border-box;
 
-        position: fixed;
         width: 100%;
         height: 22px;
         padding: 16px;
-        box-sizing: border-box;
         backdrop-filter: blur(100px);
+        -webkit-backdrop-filter: blur(100px);
+
         background: #0e0e0e52;
+
         top: 0;
         left: 0;
         z-index: 1;
@@ -67,6 +70,7 @@
 
       #status div h1 {
         color: #ffffff;
+
         font-weight: 700;
         font-size: 12px;
         margin-left: 18px;
@@ -74,39 +78,44 @@
 
       #status div svg {
         fill: #ffffff;
+
         width: 18px;
       }
 
       #status p {
         color: #ffffff;
+
         font-weight: 600;
         font-size: 12px;
       }
 
       #window {
         position: absolute;
-        background: #0e0e0e2f;
-        backdrop-filter: blur(40px);
         border-radius: 12px;
+        backdrop-filter: blur(40px);
+
+        background: #0e0e0e2f;
         box-shadow: #00000071 0px 50px 100px -20px, #000000bb 0px 30px 60px -30px,
           #00000052 0px 0px 0px 2px, #c9c9c9c4 0px 0px 0px 1px;
       }
 
       #window #upper {
-        width: 100%;
-        height: 38px;
-        padding: 10px;
         display: flex;
         align-items: center;
         box-sizing: border-box;
+
+        width: 100%;
+        height: 38px;
+        padding: 10px;
       }
 
       #window #upper div {
         border-radius: 50%;
-        background: #e7e7e75d;
         width: 16px;
         height: 16px;
         margin-right: 10px;
+
+        background: #e7e7e75d;
       }
 
       #window #upper div:first-child {
@@ -114,37 +123,43 @@
       }
 
       #window #bottom {
-        box-sizing: border-box;
-        width: 100%;
-        max-height: 512px;
-        padding: 20px 40px 20px 40px;
         display: flex;
         justify-content: center;
         overflow: auto;
+        box-sizing: border-box;
+
+        width: 100%;
+        max-height: 512px;
+        padding: 20px 40px 20px 40px;
       }
 
       #window #bottom #avatar {
         display: none;
+        object-fit: cover;
+
         margin: 20px;
         width: 156px;
         height: 156px;
         border-radius: 50%;
-        border: 6px solid #fff;
-        object-fit: cover;
+
+        border: 6px solid #ffffff00;
       }
 
       #window #bottom #user {
-        margin: 20px;
         text-align: left;
+
+        margin: 20px;
         max-width: 256px;
       }
 
       #window #bottom #user h1,
       #window #bottom #user p {
-        color: #dedede;
-        margin: 4px;
         word-break: break-all;
         white-space: pre-wrap;
+
+        margin: 4px;
+
+        color: #dedede;
       }
 
       #window #bottom #user p {
@@ -155,6 +170,7 @@
         display: flex;
         align-items: center;
         flex-wrap: wrap;
+
         border-radius: 10px;
         width: 100%;
         margin: 4px;
@@ -168,6 +184,7 @@
       #window #bottom #user #links a img {
         filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(43deg) brightness(102%)
           contrast(101%);
+
         width: 24px;
         height: 24px;
       }
@@ -211,6 +228,9 @@
       * {
         scrollbar-width: thin;
         scrollbar-color: #c9c9c9c4;
+
+        -webkit-user-select: none;
+        user-select: none;
       }
 
       *::-webkit-scrollbar {
@@ -269,47 +289,42 @@
       let macWindow = document.getElementById('window');
 
       // centerize window
-      function centerWindow() {
+      const centerWindow = () => {
         macWindow.style.left = `${window.innerWidth / 2 - macWindow.offsetWidth / 2}px`;
         macWindow.style.top = `${window.innerHeight / 2 - macWindow.offsetHeight / 2}px`;
-      }
+      };
 
-      // drag
-      if (window.innerWidth >= 900) dragElement(macWindow);
-
-      function dragElement(elmnt) {
-        var pos1 = 0,
+      // drag function
+      const dragElement = () => {
+        let pos1 = 0,
           pos2 = 0,
           pos3 = 0,
           pos4 = 0;
-        elmnt.onmousedown = dragMouseDown;
 
-        function dragMouseDown(e) {
-          e = e || window.event;
+        macWindow.onmousedown = (e) => {
           e.preventDefault();
+
           pos3 = e.clientX;
           pos4 = e.clientY;
-          document.onmouseup = closeDragElement;
-          document.onmousemove = elementDrag;
-        }
 
-        function elementDrag(e) {
-          e = e || window.event;
-          e.preventDefault();
-          pos1 = pos3 - e.clientX;
-          pos2 = pos4 - e.clientY;
-          pos3 = e.clientX;
-          pos4 = e.clientY;
-          // set the element's new position:
-          elmnt.style.top = elmnt.offsetTop - pos2 + 'px';
-          elmnt.style.left = elmnt.offsetLeft - pos1 + 'px';
-        }
+          document.onmouseup = () => {
+            document.onmouseup = null;
+            document.onmousemove = null;
+          };
 
-        function closeDragElement() {
-          document.onmouseup = null;
-          document.onmousemove = null;
-        }
-      }
+          document.onmousemove = (e) => {
+            e.preventDefault();
+
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+
+            macWindow.style.top = macWindow.offsetTop - pos2 + 'px';
+            macWindow.style.left = macWindow.offsetLeft - pos1 + 'px';
+          };
+        };
+      };
 
       // lanyard
       let avatarElement = document.getElementById('avatar');
@@ -324,7 +339,7 @@
         dnd: '#ff453a',
       };
 
-      const initialize = async () => {
+      const initializeLanyard = async () => {
         let result = await fetch(`${api}/${id}`);
         let returned = await result.json();
 
@@ -338,8 +353,9 @@
         centerWindow();
       };
 
-      initialize();
+      initializeLanyard();
       centerWindow();
+      if (window.innerWidth >= 900) dragElement();
     </script>
   </body>
 </html>
