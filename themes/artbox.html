@@ -1,392 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ username }}</title>
+    <meta content="website" property="og:type" />
+    <meta content="{{ username }}" property="og:title" />
+    <meta content="{{ about }}" property="og:description" />
+    <meta content="{{ username }}" property="og:site_name" />
+    <meta name="description" content="{{ about }}" />
+    <meta name="robots" content="index, follow" />
+    <meta name="title" content="{{ username }}" />
+    <meta name="author" content="https://me.cok.gay/" />
+    <link
+      rel="shortcut icon"
+      href="https://raw.githubusercontent.com/cokdotgay/icons/main/webp/cokdotgay-nobg.webp"
+      type="image/x-icon"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html,
+      body {
+        background-color: #000000;
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ username }}</title>
-  <meta content="website" property="og:type" />
-  <meta content="{{ username }}" property="og:title" />
-  <meta content="{{ about }}" property="og:description" />
-  <meta content="{{ username }}" property="og:site_name" />
-  <meta name="description" content="{{ about }}" />
-  <meta name="robots" content="index, follow" />
-  <meta name="title" content="{{ username }}" />
-  <meta name="author" content="https://me.cok.gay/" />
-  <link rel="shortcut icon" href="https://raw.githubusercontent.com/cokdotgay/icons/main/webp/cokdotgay-nobg.webp"
-    type="image/x-icon" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap"
-    rel="stylesheet" />
-  <style>
-    html,
-    body {
-      background-color: #000000;
-
-      width: 100%;
-      height: 100%;
-      margin: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    #box {
-      background: url(https://cdna.artstation.com/p/assets/images/images/056/297/656/large/brock-grossman-dragon-13.jpg?1668919676);
-      background-position: center;
-      background-size: cover;
-
-      width: 640px;
-      padding: 10px;
-
-      box-shadow: rgba(0, 255, 136, 0.534) 0px 16px 48px;
-    }
-
-    #box #upper {
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-
-      border: 1px solid #ff3333;
-
-      margin-bottom: 10px;
-      height: 64px;
-      display: flex;
-
-      display: none;
-    }
-
-    #box #upper a {
-      display: block;
-      color: #fff;
-      margin: 0;
-      margin-top: 5px;
-      font-size: 24px;
-      font-weight: 700;
-    }
-
-    #box #upper img {
-      display: block;
-      width: 64px;
-      height: 64px;
-      margin-right: 10px;
-      object-fit: cover;
-    }
-
-    #box #flex {
-      display: flex;
-      height: 300px;
-    }
-
-    #box #flex #left {
-      overflow: none;
-      overflow-y: auto;
-      width: 50%;
-    }
-
-    #box #flex #left h1,
-    #box #flex #left p {
-      padding: 5px 10px 5px 10px;
-      background: #000;
-      color: #fff;
-      margin: 5px;
-      margin-left: 0px;
-      word-wrap: break-word;
-      margin-top: 0;
-    }
-
-    #box #flex #left p {
-      color: #fff;
-      background: transparent;
-      font-weight: 600;
-    }
-
-    #box #flex #right {
-      background: #000;
-      overflow: auto;
-      width: 50%;
-    }
-
-    #box #flex #right a {
-      display: flex;
-      align-items: center;
-      margin: 10px;
-      word-wrap: break-word;
-      font-weight: 600;
-    }
-
-    #box #flex #right a img {
-      display: inline-block;
-      width: 32px;
-      height: 32px;
-      margin: 10px;
-      object-fit: cover;
-    }
-
-    .Discord img,
-    .Spotify img,
-    .Youtube img,
-    .Twitter img,
-    .SoundCloud img,
-    .Facebook img,
-    .Instagram img,
-    .Steam img,
-    .Twitch img,
-    .TikTok img,
-    .Patreon img,
-    .Dribbble img {
-      filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(43deg) brightness(102%) contrast(101%);
-    }
-
-    .Website img,
-    .GitHub img,
-    .DeviantArt img,
-    .ArtStation img {
-      filter: invert(0%) sepia(8%) saturate(7469%) hue-rotate(300deg) brightness(90%) contrast(110%);
-    }
-
-    .Reddit img {
-      filter: invert(66%) sepia(87%) saturate(7499%) hue-rotate(5deg) brightness(105%) contrast(106%);
-    }
-
-    .PayPal svg {
-      filter: invert(17%) sepia(30%) saturate(5563%) hue-rotate(190deg) brightness(94%) contrast(102%);
-    }
-
-    .Website {
-      background: #fff;
-      color: #000;
-    }
-
-    .Discord {
-      background: #5865f2;
-      color: #fff;
-    }
-
-    .Spotify {
-      background: #1db954;
-      color: #fff;
-    }
-
-    .Youtube {
-      background: #ff0000;
-      color: #fff;
-    }
-
-    .Twitter {
-      background: #1da1f2;
-      color: #fff;
-    }
-
-    .SoundCloud {
-      background: #ff3300;
-      color: #fff;
-    }
-
-    .Facebook {
-      background: #1877f2;
-      color: #fff;
-    }
-
-    .Instagram {
-      background: #e4405f;
-      color: #fff;
-    }
-
-    .Steam,
-    .TikTok {
-      background: #000000;
-      color: #fff;
-    }
-
-    .GitHub {
-      background: #fff;
-      color: #000;
-    }
-
-    .Reddit {
-      background: #fff;
-      color: #ff4500;
-    }
-
-    .Twitch {
-      background: #9146ff;
-      color: #fff;
-    }
-
-    .PayPal {
-      background: #fff;
-      color: #00457c;
-    }
-
-    .Patreon {
-      background: #ff424d;
-      color: #fff;
-    }
-
-    .DeviantArt {
-      background: #05cc47;
-      color: #000;
-    }
-
-    .ArtStation {
-      background: #13aff0;
-      color: #000;
-    }
-
-    .Dribbble {
-      background: #ea4c89;
-      color: #fff;
-    }
-
-    #bottom {
-      margin-top: 10px;
-      background: #000;
-      color: #fff;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #bottom a {
-      display: block;
-      font-weight: 600;
-      font-size: 12px;
-      padding-bottom: 10px;
-    }
-
-    @media (max-width: 800px) {
-      #box {
         width: 100%;
-        box-shadow: none;
+        height: 100%;
+        margin: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      #box {
+        background: url(https://cdna.artstation.com/p/assets/images/images/056/297/656/large/brock-grossman-dragon-13.jpg?1668919676);
+        background-position: center;
+        background-size: cover;
+
+        width: 640px;
+        padding: 10px;
+
+        box-shadow: rgba(0, 255, 136, 0.534) 0px 16px 48px;
+      }
+
+      #box #upper {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+
+        border: 1px solid #ff3333;
+
+        margin-bottom: 10px;
+        height: 64px;
+        display: flex;
+
+        display: none;
       }
 
       #box #upper a {
-        font-size: 18px;
+        display: block;
+        color: #fff;
+        margin: 0;
+        margin-top: 5px;
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      #box #upper img {
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin-right: 10px;
+        object-fit: cover;
       }
 
       #box #flex {
-        flex-wrap: wrap;
-        height: 400px;
+        display: flex;
+        height: 300px;
       }
 
-      #box #flex #left,
-      #box #flex #right {
-        width: 100%;
-        height: 200px;
+      #box #flex #left {
+        overflow: none;
+        overflow-y: auto;
+        width: 50%;
       }
 
-      #box #flex #left h1 {
-        font-size: 20px;
-        margin: 0;
+      #box #flex #left h1,
+      #box #flex #left p {
+        padding: 5px 10px 5px 10px;
+        background: #000;
+        color: #fff;
+        margin: 5px;
+        margin-left: 0px;
+        word-wrap: break-word;
+        margin-top: 0;
       }
 
       #box #flex #left p {
-        font-size: 14px;
-        margin: 0;
+        color: #fff;
+        background: transparent;
+        font-weight: 600;
+      }
+
+      #box #flex #right {
+        background: #000;
+        overflow: auto;
+        width: 50%;
       }
 
       #box #flex #right a {
-        font-size: 14px;
+        display: flex;
+        align-items: center;
+        margin: 10px;
+        word-wrap: break-word;
+        font-weight: 600;
       }
-    }
 
-    * {
-      scrollbar-width: thin;
-      scrollbar-color: #000 #09ff84;
-    }
+      #box #flex #right a img {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        margin: 10px;
+        object-fit: cover;
+      }
 
-    *::-webkit-scrollbar {
-      width: 12px;
-    }
+      .Discord img,
+      .Spotify img,
+      .Youtube img,
+      .Twitter img,
+      .SoundCloud img,
+      .Facebook img,
+      .Instagram img,
+      .Steam img,
+      .Twitch img,
+      .TikTok img,
+      .Patreon img,
+      .Dribbble img {
+        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(43deg) brightness(102%)
+          contrast(101%);
+      }
 
-    *::-webkit-scrollbar-track {
-      background: #09ff84;
-    }
+      .Website img,
+      .GitHub img,
+      .DeviantArt img,
+      .ArtStation img {
+        filter: invert(0%) sepia(8%) saturate(7469%) hue-rotate(300deg) brightness(90%)
+          contrast(110%);
+      }
 
-    *::-webkit-scrollbar-thumb {
-      background-color: #000;
-      border-radius: 0px;
-      border: 2px solid #09ff84;
-    }
+      .Reddit img {
+        filter: invert(66%) sepia(87%) saturate(7499%) hue-rotate(5deg) brightness(105%)
+          contrast(106%);
+      }
 
-  </style>
-</head>
+      .PayPal svg {
+        filter: invert(17%) sepia(30%) saturate(5563%) hue-rotate(190deg) brightness(94%)
+          contrast(102%);
+      }
 
-<body>
-  <div id="box">
-    <div id="upper">
-      <img src="" alt="avatar" id="avatar" />
-      <a id="username" href="">username#0000</a>
-    </div>
-    <div id="flex">
-      <div id="left">
-        <h1>{{ username }}</h1>
-        <p>{{ about }}</p>
+      .Website {
+        background: #fff;
+        color: #000;
+      }
+
+      .Discord {
+        background: #5865f2;
+        color: #fff;
+      }
+
+      .Spotify {
+        background: #1db954;
+        color: #fff;
+      }
+
+      .Youtube {
+        background: #ff0000;
+        color: #fff;
+      }
+
+      .Twitter {
+        background: #1da1f2;
+        color: #fff;
+      }
+
+      .SoundCloud {
+        background: #ff3300;
+        color: #fff;
+      }
+
+      .Facebook {
+        background: #1877f2;
+        color: #fff;
+      }
+
+      .Instagram {
+        background: #e4405f;
+        color: #fff;
+      }
+
+      .Steam,
+      .TikTok {
+        background: #000000;
+        color: #fff;
+      }
+
+      .GitHub {
+        background: #fff;
+        color: #000;
+      }
+
+      .Reddit {
+        background: #fff;
+        color: #ff4500;
+      }
+
+      .Twitch {
+        background: #9146ff;
+        color: #fff;
+      }
+
+      .PayPal {
+        background: #fff;
+        color: #00457c;
+      }
+
+      .Patreon {
+        background: #ff424d;
+        color: #fff;
+      }
+
+      .DeviantArt {
+        background: #05cc47;
+        color: #000;
+      }
+
+      .ArtStation {
+        background: #13aff0;
+        color: #000;
+      }
+
+      .Dribbble {
+        background: #ea4c89;
+        color: #fff;
+      }
+
+      #bottom {
+        margin-top: 10px;
+        background: #000;
+        color: #fff;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #bottom a {
+        display: block;
+        font-weight: 600;
+        font-size: 12px;
+        padding-bottom: 10px;
+      }
+
+      @media (max-width: 800px) {
+        #box {
+          width: 100%;
+          box-shadow: none;
+        }
+
+        #box #upper a {
+          font-size: 18px;
+        }
+
+        #box #flex {
+          flex-wrap: wrap;
+          height: 400px;
+        }
+
+        #box #flex #left,
+        #box #flex #right {
+          width: 100%;
+          height: 200px;
+        }
+
+        #box #flex #left h1 {
+          font-size: 20px;
+          margin: 0;
+        }
+
+        #box #flex #left p {
+          font-size: 14px;
+          margin: 0;
+        }
+
+        #box #flex #right a {
+          font-size: 14px;
+        }
+      }
+
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: #000 #09ff84;
+      }
+
+      *::-webkit-scrollbar {
+        width: 12px;
+      }
+
+      *::-webkit-scrollbar-track {
+        background: #09ff84;
+      }
+
+      *::-webkit-scrollbar-thumb {
+        background-color: #000;
+        border-radius: 0px;
+        border: 2px solid #09ff84;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="box">
+      <div id="upper">
+        <img src="" alt="avatar" id="avatar" />
+        <a id="username" href="">username#0000</a>
       </div>
-      <div id="right">
-        {% for link in links %}
-        <a href="{{ link.url }}" class="{{ link.display }}">
-          <img src="/static/icons/{{ link.display|lower }}.svg" alt="{{ link.title }}" />
-          {{ link.title }}
+      <div id="flex">
+        <div id="left">
+          <h1>{{ username }}</h1>
+          <p>{{ about }}</p>
+        </div>
+        <div id="right">
+          {% for link in links %}
+          <a href="{{ link.url }}" class="{{ link.display }}">
+            <img src="/static/icons/{{ link.display|lower }}.svg" alt="{{ link.title }}" />
+            {{ link.title }}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      <div id="bottom">
+        <a href="https://www.artstation.com/artwork/6brOdx" id="bottom">
+          Background&nbsp;Source
         </a>
-        {% endfor %}
+        &nbsp;/&nbsp;
+        <a href="/edit" id="bottom"> Edit&nbsp;Your&nbsp;Profile </a>
       </div>
     </div>
-    <div id="bottom">
-      <a href="https://www.artstation.com/artwork/6brOdx" id="bottom">
-        Background&nbsp;Source
-      </a>
-      &nbsp;/&nbsp;
-      <a href="/edit" id="bottom"> Edit&nbsp;Your&nbsp;Profile </a>
-    </div>
-  </div>
-  <script>
-    let usernameElement = document.getElementById('username');
-    let avatarElement = document.getElementById('avatar');
-    let infoElement = document.getElementById('upper');
+    <script>
+      let usernameElement = document.getElementById('username');
+      let avatarElement = document.getElementById('avatar');
+      let infoElement = document.getElementById('upper');
 
-    const api = 'https://api.lanyard.rest/v1/users';
-    const id = '{{ lanyard_id }}';
+      const api = 'https://api.lanyard.rest/v1/users';
+      const id = '{{ lanyard_id }}';
 
-    const styles = {
-      online: '#36be1b',
-      offline: '#cccccc',
-      idle: '#ffbd2f',
-      dnd: '#ff3640',
-    };
+      const styles = {
+        online: '#36be1b',
+        offline: '#cccccc',
+        idle: '#ffbd2f',
+        dnd: '#ff3640',
+      };
 
-    const initialize = async () => {
-      let result = await fetch(`${api}/${id}`);
-      let returned = await result.json();
+      const initialize = async () => {
+        let result = await fetch(`${api}/${id}`);
+        let returned = await result.json();
 
-      let { username, discriminator, avatar } = returned.data.discord_user;
-      let format = avatar.startsWith("a_") ? "gif" : "webp";
+        let { username, discriminator, avatar } = returned.data.discord_user;
+        let format = avatar.startsWith('a_') ? 'gif' : 'webp';
 
-      avatarElement.src = `https://cdn.discordapp.com/avatars/${id}/${avatar}.${format}`;
+        avatarElement.src = `https://cdn.discordapp.com/avatars/${id}/${avatar}.${format}`;
 
-      infoElement.style.borderColor = styles[returned.data.discord_status];
-      infoElement.style.display = 'flex';
+        infoElement.style.borderColor = styles[returned.data.discord_status];
+        infoElement.style.display = 'flex';
 
-      usernameElement.innerText = `${username}#${discriminator}`;
-      usernameElement.href = `https://discord.com/users/${id}`;
-    };
+        usernameElement.innerText = `${username}#${discriminator}`;
+        usernameElement.href = `https://discord.com/users/${id}`;
+      };
 
-    initialize();
-  </script>
-</body>
-
+      initialize();
+    </script>
+  </body>
 </html>

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,138 +13,141 @@
     <meta name="robots" content="index, follow" />
     <meta name="title" content="{{ username }}" />
     <meta name="author" content="https://me.cok.gay/" />
-    <link rel="shortcut icon" href="https://raw.githubusercontent.com/cokdotgay/icons/main/webp/cokdotgay-nobg.webp"
-        type="image/x-icon" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600&display=swap"
-        rel="stylesheet">
+    <link
+      rel="shortcut icon"
+      href="https://raw.githubusercontent.com/cokdotgay/icons/main/webp/cokdotgay-nobg.webp"
+      type="image/x-icon"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        html,
-        body {
-            background-color: #07160c;
-            font-family: 'Roboto Mono', monospace;
-        }
+      html,
+      body {
+        background-color: #07160c;
+        font-family: 'Roboto Mono', monospace;
+      }
 
-        #box {
-            position: absolute;
-            left: 10px;
-            top: 10px;
-            width: calc(100% - 20px);
-            height: calc(100% - 20px);
-            border: 1px solid #2a944d;
-            background: #0e2c18;
-        }
+      #box {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        width: calc(100% - 20px);
+        height: calc(100% - 20px);
+        border: 1px solid #2a944d;
+        background: #0e2c18;
+      }
 
-        #box #title {
-            margin: 0;
-            box-sizing: border-box;
-            width: 100%;
-            padding: 4px;
-            background: #2a944d;
-            color: #0e2c18;
-            font-size: 14px;
-            font-weight: 400;
-        }
+      #box #title {
+        margin: 0;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 4px;
+        background: #2a944d;
+        color: #0e2c18;
+        font-size: 14px;
+        font-weight: 400;
+      }
 
-        #box #command {
-            margin: 0;
-            box-sizing: border-box;
-            width: 100%;
-            padding: 4px;
-            outline: none;
-            border: none;
-            border-bottom: 1px dotted #2a944d;
-            color: #2a944d;
-            background: #0e2c18;
-            font-family: 'Roboto Mono', monospace;
-        }
+      #box #command {
+        margin: 0;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 4px;
+        outline: none;
+        border: none;
+        border-bottom: 1px dotted #2a944d;
+        color: #2a944d;
+        background: #0e2c18;
+        font-family: 'Roboto Mono', monospace;
+      }
 
-        #box #help,
-        #box #about,
-        #box #links,
-        #box #unknown {
-            color: #2a944d;
-            padding: 10px;
-            font-size: 14px;
-            font-weight: 400;
-        }
+      #box #help,
+      #box #about,
+      #box #links,
+      #box #unknown {
+        color: #2a944d;
+        padding: 10px;
+        font-size: 14px;
+        font-weight: 400;
+      }
 
-        #box #links a {
-            color: #2a944d;
-            text-decoration: none;
-            display: block;
-        }
+      #box #links a {
+        color: #2a944d;
+        text-decoration: none;
+        display: block;
+      }
 
-        #box #links a:hover {
-            text-decoration: underline;
-        }
+      #box #links a:hover {
+        text-decoration: underline;
+      }
 
-        ::placeholder {
-            color: #2a693f;
-            opacity: 1;
-        }
-
+      ::placeholder {
+        color: #2a693f;
+        opacity: 1;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="box">
-        <h1 id="title">[{{ username }}@pc]$</h1>
-        <input id="command" type="text" placeholder="help" />
-        <div id="about">{{ about }}</div>
-        <div id="links">
-            {% for link in links %}
-            <a href="{{ link.url }}">{{ link.title }}</a>
-            {% endfor %}
-        </div>
-        <div id="help">
-            list of commands:
-            <br>
-            -----------------
-            <br>
-            about | about myself
-            <br>
-            links | show links
-            <br>
-            -----------------
-        </div>
-        <div id="unknown">command not found</div>
+      <h1 id="title">[{{ username }}@pc]$</h1>
+      <input id="command" type="text" placeholder="help" />
+      <div id="about">{{ about }}</div>
+      <div id="links">
+        {% for link in links %}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+        {% endfor %}
+      </div>
+      <div id="help">
+        list of commands:
+        <br />
+        -----------------
+        <br />
+        about | about myself
+        <br />
+        links | show links
+        <br />
+        -----------------
+      </div>
+      <div id="unknown">command not found</div>
     </div>
     <script>
-        let input = document.getElementById("command");
+      let input = document.getElementById('command');
 
-        const commands = {
-            about: document.getElementById("about"),
-            links: document.getElementById("links"),
-            help: document.getElementById("help"),
-            unknown: document.getElementById("unknown"),
-        };
+      const commands = {
+        about: document.getElementById('about'),
+        links: document.getElementById('links'),
+        help: document.getElementById('help'),
+        unknown: document.getElementById('unknown'),
+      };
 
-        input.onkeydown = (e) => {
-            if (e.code == "Enter") {
-                const gotInput = input.value.trim();
+      input.onkeydown = (e) => {
+        if (e.code == 'Enter') {
+          const gotInput = input.value.trim();
 
-                clearAll();
+          clearAll();
 
-                for (const [key, value] of Object.entries(commands)) {
-                    if (gotInput === key) {
-                        value.style.display = "block";
-                        return;
-                    }
-                }
-
-                commands.unknown.style.display = "block";
+          for (const [key, value] of Object.entries(commands)) {
+            if (gotInput === key) {
+              value.style.display = 'block';
+              return;
             }
-        }
+          }
 
-        function clearAll() {
-            Object.values(commands).forEach((v) => v.style.display = "none");
-            input.value = "";
+          commands.unknown.style.display = 'block';
         }
+      };
 
-        clearAll()
+      function clearAll() {
+        Object.values(commands).forEach((v) => (v.style.display = 'none'));
+        input.value = '';
+      }
+
+      clearAll();
     </script>
-</body>
-
+  </body>
 </html>
