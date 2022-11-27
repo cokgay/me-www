@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ username }}</title>
+    <meta content="website" property="og:type" />
+    <meta content="{{ username }}" property="og:title" />
+    <meta content="{{ about }}" property="og:description" />
+    <meta content="{{ username }}" property="og:site_name" />
+    <meta name="description" content="{{ about }}" />
+    <meta name="robots" content="index, follow" />
+    <meta name="title" content="{{ username }}" />
+    <meta name="author" content="https://me.cok.gay/" />
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/cokdotgay/icons/main/webp/cokdotgay-nobg.webp"
+        type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+        html,
+        body {
+            background: #f8f5f0;
+
+            width: 100%;
+            height: 100%;
+            margin: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family: 'PT Serif', serif;
+
+            text-align: center;
+        }
+
+        #box {
+            background: #ffffff;
+            border: 10px solid #fff8f3;
+            padding: 10px;
+            border-radius: 20px;
+            width: 512px;
+        }
+
+        #box #avatar {
+            display: none;
+            width: 128px;
+            height: 128px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px dashed #ff4242;
+            margin: 20px;
+        }
+
+        #box h1 {
+            color: #24201c;
+            word-break: break-all;
+            margin: 5px;
+        }
+
+        #box p {
+            color: #2b2621;
+            word-break: break-all;
+            white-space: pre-wrap;
+            margin: 10px;
+        }
+
+        #box #flex {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #box #flex a {
+            width: 40%;
+            margin: 5px;
+            padding: 5px 10px 5px 10px;
+
+            background: #fff8f3;
+            border: 2px dashed #f3e9d9;
+            color: #24201c;
+
+            text-decoration: none;
+            border-radius: 20px;
+
+            display: flex;
+            align-items: center;
+        }
+
+        #box #flex img {
+            width: 32px;
+            height: 32px;
+            object-fit: cover;
+            margin: 5px;
+            margin-right: 10px;
+        }
+
+        #box #flex a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 640px) {
+
+            html,
+            body {
+                display: unset;
+                margin: 0;
+                background: #ffffff;
+            }
+
+            #box {
+                width: 100%;
+                box-sizing: border-box;
+                border: none;
+                border-radius: 0px;
+            }
+
+            #box h1 {
+                font-size: 24px;
+            }
+
+            #box p {
+                font-size: 14px;
+            }
+
+            #box img {
+                width: 96px;
+                height: 96px;
+            }
+
+            #box #flex a {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <img id="avatar"
+            src="https://cdn.discordapp.com/avatars/1013270483560579165/330391fcbde58e16642cd4aa807c4eca.webp"
+            alt="avatar" />
+        <h1>{{ username }}</h1>
+        <p>{{ about }}</p>
+        <div id="flex">
+            {% for link in links %}
+            <a href="{{ link.url }}">
+                <img src="/static/icons/{{ link.display|lower }}.svg" alt="{{ link.title }}" />
+                {{ link.title }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="/static/lanyard.js"></script>
+    <script>
+        initializeLanyard('{{ lanyard_id }}', async (id, { discord_user, discord_status }) => {
+            const styles = {
+                online: '#30d158',
+                offline: '#cccccc',
+                idle: '#ffbd2f',
+                dnd: '#ff3640',
+            };
+
+            const { username, discriminator, avatar } = discord_user;
+            const format = avatar.startsWith('a_') ? 'gif' : 'webp';
+
+            let avatarElement = document.getElementById('avatar');
+
+            avatarElement.style.display = 'inline';
+            avatarElement.src = `https://cdn.discordapp.com/avatars/${id}/${avatar}.${format}`;
+            avatarElement.style.borderColor = styles[discord_status];
+        });
+    </script>
+</body>
+
+</html>
