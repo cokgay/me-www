@@ -26,6 +26,7 @@ const form = document.querySelector("form[action='/edit']");
 const aboutTextarea = document.querySelector("textarea[name='about']");
 const lanyardIdInput = document.querySelector("input[name='lanyard-id']");
 const themeSelect = document.querySelector("select[name='theme']");
+const themeConfig = document.querySelector("textarea[name='theme-config']");
 const addedLinksBox = document.querySelector('div.box.links');
 
 const newLinkButton = document.querySelector("button[class='new-link']");
@@ -41,6 +42,11 @@ window.onload = async () => {
     aboutTextarea.textContent = userData.about ?? '';
     lanyardIdInput.value = userData.lanyardId ?? '';
     themeSelect.value = userData.theme ?? 'Classic';
+    themeConfig.value = '';
+
+    for (const [key, value] of Object.entries(userData.themeOptions)) {
+      themeConfig.value += `${key}=${value}\n`;
+    }
 
     userData.links.forEach((link) => {
       addedLinksBox.appendChild(createLink(link.title, link.url, link.display));
@@ -70,6 +76,7 @@ submitButton.onclick = submitButton.onsubmit = async (b) => {
   const lanyardId = document.querySelector('input[name="lanyard-id"');
   const theme = document.querySelector('select[name="theme"');
   const linksBox = document.querySelector('div.box.links');
+  const themeConfig = document.querySelector('textarea[name="theme-config"');
 
   const links = [];
   for (const element of linksBox.childNodes) {
@@ -82,11 +89,17 @@ submitButton.onclick = submitButton.onsubmit = async (b) => {
     });
   }
 
+  const keyValueConfig = {};
+  for (const line of themeConfig.value.split('\n')) {
+    const [key, value] = line.split('=');
+    keyValueConfig[key] = value;
+  }
+
   const data = {
     about: aboutMe.value,
     lanyardId: lanyardId.value,
     theme: theme.value,
-    themeOptions: {},
+    themeOptions: keyValueConfig,
     links,
   };
 

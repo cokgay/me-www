@@ -31,7 +31,9 @@ form[action='/edit'] {
   grid-template-columns: repeat(6, 1fr);
 }
 
-textarea[name='about'] {
+textarea[name='about'],
+textarea[name='theme-config'],
+textarea[name='theme-config'] + hr {
   grid-column: 1/7;
 }
 
@@ -92,8 +94,7 @@ button.delete-link {
   border-bottom-left-radius: 0;
 }
 
-button.new-link,
-button.new-link + hr {
+button.new-link {
   grid-column: 1/7;
 }
 
