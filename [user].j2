@@ -2,13 +2,13 @@
 
 {% match theme %}
 {% when "ArtBox" %}
-{% include "themes/artbox.html" %}
+{% include "themes/artbox.j2" %}
 {% when "Black" %}
-{% include "themes/black.html" %}
+{% include "themes/black.j2" %}
 {% when "MacOS" %}
-{% include "themes/macos.html" %}
+{% include "themes/macos.j2" %}
 {% when "Classic" %}
-{% include "themes/classic.html" %}
+{% include "themes/classic.j2" %}
 {% else %}
 This is an unreachable page. If you see this somehow, please contact with us.
 {% endmatch %}

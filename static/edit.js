@@ -40,7 +40,7 @@ window.onload = async () => {
   if (userData) {
     aboutTextarea.textContent = userData.about ?? '';
     lanyardIdInput.value = userData.lanyardId ?? '';
-    themeSelect.value = userData.theme ?? 'ArtBox';
+    themeSelect.value = userData.theme ?? 'Classic';
 
     userData.links.forEach((link) => {
       addedLinksBox.appendChild(createLink(link.title, link.url, link.display));
@@ -86,6 +86,7 @@ submitButton.onclick = submitButton.onsubmit = async (b) => {
     about: aboutMe.value,
     lanyardId: lanyardId.value,
     theme: theme.value,
+    themeOptions: {},
     links,
   };
 

@@ -3,6 +3,7 @@ import { createToast } from '/static/utils.js';
 const form = document.querySelector('form[action="/sign-up"]');
 const submitButton = document.querySelector("button[type='submit']");
 const captcha = document.querySelector('div.cf-turnstile');
+const loginDirectlyCheckbox = document.querySelector('.loginDirectlyCheckbox > input');
 
 window.onload = () => {
   if (localStorage.getItem('token')) location.href = '/edit';
@@ -26,11 +27,13 @@ submitButton.onsubmit = submitButton.onclick = async (b) => {
     },
   });
 
+  const result = await response.text();
+
   if (response.status !== 200) {
-    createToast(await response.text());
+    createToast(result);
   } else {
     if (loginDirectlyCheckbox.checked) {
-      localStorage.setItem('token', response.text);
+      localStorage.setItem('token', result);
       location.href = '/edit';
     } else {
       location.href = '/sign-in';
