@@ -23,7 +23,7 @@ const initializeLanyard = (discord_id, callback) => {
 
         setInterval(() => {
           ws.send(JSON.stringify({ op: LANYARD_OP.HEARTBEAT }));
-        }, 1000 * 20);
+        }, 1000 * 30);
       }
 
       case LANYARD_OP.PRESENCE: {

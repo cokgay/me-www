@@ -102,6 +102,8 @@ submitButton.onclick = submitButton.onsubmit = async (b) => {
 
   if (result.status !== 200) {
     createToast(await result.text());
+  } else {
+    createToast('Settings saved.');
   }
 };
 
