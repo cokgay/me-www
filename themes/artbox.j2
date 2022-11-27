@@ -155,6 +155,7 @@
     }
 
     .Website img,
+    .Email img,
     .GitHub img,
     .DeviantArt img,
     .ArtStation img {
@@ -169,7 +170,7 @@
       filter: invert(17%) sepia(30%) saturate(5563%) hue-rotate(190deg) brightness(94%) contrast(102%);
     }
 
-    .Website {
+    .Website, .Email {
       background: #fff;
       color: #000;
     }
@@ -255,23 +256,6 @@
       color: #fff;
     }
 
-    #bottom {
-      margin-top: 10px;
-      background: #000;
-      color: #fff;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #bottom a {
-      display: block;
-      font-weight: 600;
-      font-size: 12px;
-      padding-bottom: 10px;
-    }
-
     @media (max-width: 800px) {
       #box {
         width: 100%;
@@ -349,13 +333,6 @@
         </a>
         {% endfor %}
       </div>
-    </div>
-    <div id="bottom">
-      <a href="https://www.artstation.com/artwork/6brOdx" id="bottom">
-        Background&nbsp;Source
-      </a>
-      &nbsp;/&nbsp;
-      <a href="/edit" id="bottom"> Edit&nbsp;Your&nbsp;Profile </a>
     </div>
   </div>
   <script src="/static/lanyard.js"></script>

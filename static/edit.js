@@ -19,6 +19,7 @@ const allDisplays = [
   'Twitter',
   'Website',
   'Youtube',
+  'Email',
 ];
 
 const form = document.querySelector("form[action='/edit']");
@@ -85,7 +86,7 @@ submitButton.onclick = submitButton.onsubmit = async (b) => {
     links.push({
       display: linkNodes[0].value,
       title: linkNodes[1].value,
-      url: linkNodes[2].value,
+      url: `${linkNodes[0].value === 'Email' ? 'mailto:' : ''}${linkNodes[2].value}`,
     });
   }
 
@@ -166,18 +167,31 @@ function createLink(displayName = '', displayURL = '', selection = 'Website') {
   linkDivDisplayName.name = 'display-title';
   linkDivDisplayName.type = 'text';
   linkDivDisplayName.placeholder = 'Display title';
-  linkDivDisplayName.value = displayName.length ? displayName : selection;
+  linkDivDisplayName.value = displayName.length ? displayName : '';
   linkDivDisplayName.maxLength = 16;
   linkDivDisplayName.setAttribute('required', '');
 
   linkDivDisplayURL.name = 'display-url';
-  linkDivDisplayURL.type = 'url';
-  linkDivDisplayURL.placeholder = 'Display URL';
-  linkDivDisplayURL.value = displayURL;
+  linkDivDisplayURL.value = linkDivSelect.value === 'Email' ? displayURL.slice(7) : displayURL;
   linkDivDisplayURL.maxLength = 128;
-  linkDivDisplayURL.pattern = 'https?://.*';
-  linkDivDisplayURL.title = "Link must start with 'https://' or 'http://'";
   linkDivDisplayURL.setAttribute('required', '');
+
+  const displayCheck = () => {
+    if (linkDivSelect.value === 'Email') {
+      linkDivDisplayURL.type = 'email';
+      linkDivDisplayURL.pattern = '.*';
+      linkDivDisplayURL.title = '';
+      linkDivDisplayURL.placeholder = 'Display Email';
+    } else {
+      linkDivDisplayURL.type = 'url';
+      linkDivDisplayURL.pattern = '(https?://.*)|(mailto:.*)';
+      linkDivDisplayURL.title = "Link must start with 'https://', 'http://' or 'mailto:'";
+      linkDivDisplayURL.placeholder = 'Display URL';
+    }
+  };
+
+  displayCheck();
+  linkDivSelect.onchange = displayCheck;
 
   deleteButton.className = 'delete-link';
   deleteButton.textContent = '✕';
