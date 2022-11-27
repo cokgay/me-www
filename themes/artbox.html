@@ -2,20 +2,7 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ username }}</title>
-  <meta content="website" property="og:type" />
-  <meta content="{{ username }}" property="og:title" />
-  <meta content="{{ about }}" property="og:description" />
-  <meta content="{{ username }}" property="og:site_name" />
-  <meta name="description" content="{{ about }}" />
-  <meta name="robots" content="index, follow" />
-  <meta name="title" content="{{ username }}" />
-  <meta name="author" content="https://me.cok.gay/" />
-  <link rel="shortcut icon" href="https://raw.githubusercontent.com/cokdotgay/icons/main/webp/cokdotgay-nobg.webp"
-    type="image/x-icon" />
+  {% include "themes/components/header.html" %}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap"
