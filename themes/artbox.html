@@ -9,6 +9,11 @@
       rel="stylesheet"
     />
     <style>
+      :root {
+        --background-url: url(https://cdna.artstation.com/p/assets/images/images/056/297/656/large/brock-grossman-dragon-13.jpg);
+        --secondary-color: #09ff84be;
+      }
+
       html,
       body {
         background-color: #000000;
@@ -33,14 +38,14 @@
       }
 
       #box {
-        background: url(https://cdna.artstation.com/p/assets/images/images/056/297/656/large/brock-grossman-dragon-13.jpg?1668919676);
+        background: var(--background-url);
         background-position: center;
         background-size: cover;
 
         width: 640px;
         padding: 10px;
 
-        box-shadow: rgba(0, 255, 136, 0.534) 0px 16px 48px;
+        box-shadow: var(--secondary-color) 0px 16px 48px;
       }
 
       #box #upper {
@@ -299,7 +304,7 @@
 
       * {
         scrollbar-width: thin;
-        scrollbar-color: #000 #09ff84;
+        scrollbar-color: #000 var(--secondary-color);
       }
 
       *::-webkit-scrollbar {
@@ -307,13 +312,13 @@
       }
 
       *::-webkit-scrollbar-track {
-        background: #09ff84;
+        background: var(--secondary-color);
       }
 
       *::-webkit-scrollbar-thumb {
         background-color: #000;
         border-radius: 0px;
-        border: 2px solid #09ff84;
+        border: 2px solid var(--secondary-color);
       }
     </style>
   </head>

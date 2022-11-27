@@ -9,9 +9,16 @@
       rel="stylesheet"
     />
     <style>
+      :root {
+        --background-color: #f8f5f0;
+        --secondary-color: #ffffff;
+        --third-color: #fff8f3;
+        --foreground-color: #24201c;
+      }
+
       html,
       body {
-        background: #f8f5f0;
+        background: var(--background-color);
 
         width: 100%;
         height: 100%;
@@ -27,8 +34,8 @@
       }
 
       #box {
-        background: #ffffff;
-        border: 10px solid #fff8f3;
+        background: var(--secondary-color);
+        border: 10px solid var(--third-color);
         padding: 10px;
         border-radius: 20px;
         width: 512px;
@@ -40,18 +47,18 @@
         height: 128px;
         object-fit: cover;
         border-radius: 50%;
-        border: 5px dashed #ff4242;
+        border: 5px dashed #000000;
         margin: 20px;
       }
 
       #box h1 {
-        color: #24201c;
+        color: var(--foreground-color);
         word-break: break-all;
         margin: 5px;
       }
 
       #box p {
-        color: #2b2621;
+        color: var(--foreground-color);
         word-break: break-all;
         white-space: pre-wrap;
         margin: 10px;
@@ -70,9 +77,9 @@
         margin: 5px;
         padding: 5px 10px 5px 10px;
 
-        background: #fff8f3;
-        border: 2px dashed #f3e9d9;
-        color: #24201c;
+        background: var(--third-color);
+        border: 2px dashed var(--background-color);
+        color: var(--foreground-color);
 
         text-decoration: none;
         border-radius: 20px;
@@ -98,7 +105,7 @@
         body {
           display: unset;
           margin: 0;
-          background: #ffffff;
+          background: var(--secondary-color);
         }
 
         #box {
@@ -130,11 +137,7 @@
 
   <body>
     <div id="box">
-      <img
-        id="avatar"
-        src="https://cdn.discordapp.com/avatars/1013270483560579165/330391fcbde58e16642cd4aa807c4eca.webp"
-        alt="avatar"
-      />
+      <img id="avatar" src="" alt="avatar" />
       <h1>{{ username }}</h1>
       <p>{{ about }}</p>
       <div id="flex">

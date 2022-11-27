@@ -9,9 +9,14 @@
       rel="stylesheet"
     />
     <style>
+      :root {
+        --background-color: #000000;
+        --foreground-color: #ffffff;
+      }
+
       html,
       body {
-        background-color: #000000;
+        background-color: var(--background-color);
 
         width: 100%;
         height: 100%;
@@ -34,14 +39,14 @@
         width: 128px;
         height: 128px;
         border-radius: 100%;
-        border: 2px solid #fff;
+        border: 2px solid var(--foreground-color);
         object-fit: cover;
         display: none;
       }
 
       #box h1,
       #box p {
-        color: #fff;
+        color: var(--foreground-color);
         word-break: break-all;
         white-space: pre-wrap;
       }
