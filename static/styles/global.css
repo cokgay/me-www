@@ -36,10 +36,7 @@ form {
   gap: 6px;
 }
 
-input[type='text'],
-input[type='password'],
-input[type='url'],
-input[type='email'],
+input,
 textarea {
   color: var(--foreground);
   background-color: var(--background-3);

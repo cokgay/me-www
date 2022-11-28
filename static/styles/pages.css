@@ -33,7 +33,7 @@ form[action='/edit'] {
 
 textarea[name='about'],
 textarea[name='theme-config'],
-textarea[name='theme-config'] + hr {
+textarea[name='theme-config'], hr {
   grid-column: 1/7;
 }
 
