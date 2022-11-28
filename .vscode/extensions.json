@@ -1,6 +1,6 @@
 {
   "recommendations": [
     "esbenp.prettier-vscode",
-    "wholroyd.jinja"
+    "samuelcolvin.jinjahtml",
   ]
 }
