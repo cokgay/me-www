@@ -73,14 +73,10 @@ submitButton.onclick = submitButton.onsubmit = async (b) => {
 
   if (!form.reportValidity()) return;
 
-  const aboutMe = document.querySelector('textarea[name="about"');
-  const lanyardId = document.querySelector('input[name="lanyard-id"');
-  const theme = document.querySelector('select[name="theme"');
-  const linksBox = document.querySelector('div.box.links');
-  const themeConfig = document.querySelector('textarea[name="theme-config"');
+  submitButton.setAttribute('disabled', '');
 
   const links = [];
-  for (const element of linksBox.childNodes) {
+  for (const element of addedLinksBox.childNodes) {
     const linkNodes = element.childNodes;
 
     links.push({
@@ -97,9 +93,9 @@ submitButton.onclick = submitButton.onsubmit = async (b) => {
   }
 
   const data = {
-    about: aboutMe.value,
-    lanyardId: lanyardId.value,
-    theme: theme.value,
+    about: aboutTextarea.value,
+    lanyardId: lanyardIdInput.value,
+    theme: themeSelect.value,
     themeOptions: keyValueConfig,
     links,
   };
@@ -119,6 +115,7 @@ submitButton.onclick = submitButton.onsubmit = async (b) => {
     createToast(await result.text());
   } else {
     createToast('Settings saved.');
+    submitButton.removeAttribute('disabled');
   }
 };
 
@@ -176,22 +173,19 @@ function createLink(displayName = '', displayURL = '', selection = 'Website') {
   linkDivDisplayURL.maxLength = 128;
   linkDivDisplayURL.setAttribute('required', '');
 
-  const displayCheck = () => {
-    if (linkDivSelect.value === 'Email') {
+  linkDivSelect.onchange = () => {
+    if (linkDivSelect.value === "Email") {
       linkDivDisplayURL.type = 'email';
-      linkDivDisplayURL.pattern = '.*';
-      linkDivDisplayURL.title = '';
+      linkDivDisplayURL.removeAttribute('pattern');
+      linkDivDisplayURL.removeAttribute('title');
       linkDivDisplayURL.placeholder = 'Display Email';
     } else {
       linkDivDisplayURL.type = 'url';
-      linkDivDisplayURL.pattern = '(https?://.*)|(mailto:.*)';
-      linkDivDisplayURL.title = "Link must start with 'https://', 'http://' or 'mailto:'";
+      linkDivDisplayURL.pattern = 'https?://.*';
+      linkDivDisplayURL.title = "Link must start with 'https://' or 'http://'";
       linkDivDisplayURL.placeholder = 'Display URL';
     }
-  };
-
-  displayCheck();
-  linkDivSelect.onchange = displayCheck;
+  }
 
   deleteButton.className = 'delete-link';
   deleteButton.textContent = '✕';
