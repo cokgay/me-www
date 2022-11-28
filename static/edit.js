@@ -173,8 +173,8 @@ function createLink(displayName = '', displayURL = '', selection = 'Website') {
   linkDivDisplayURL.maxLength = 128;
   linkDivDisplayURL.setAttribute('required', '');
 
-  linkDivSelect.onchange = () => {
-    if (linkDivSelect.value === "Email") {
+  (linkDivSelect.onchange = () => {
+    if (linkDivSelect.value === 'Email') {
       linkDivDisplayURL.type = 'email';
       linkDivDisplayURL.removeAttribute('pattern');
       linkDivDisplayURL.removeAttribute('title');
@@ -185,7 +185,7 @@ function createLink(displayName = '', displayURL = '', selection = 'Website') {
       linkDivDisplayURL.title = "Link must start with 'https://' or 'http://'";
       linkDivDisplayURL.placeholder = 'Display URL';
     }
-  }
+  })();
 
   deleteButton.className = 'delete-link';
   deleteButton.textContent = '✕';
