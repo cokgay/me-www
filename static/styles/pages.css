@@ -45,7 +45,8 @@ select[name='theme'] {
   grid-column: 5/7;
 }
 
-div.box.links, div.box.theme-configs {
+div.box.links,
+div.box.theme-configs {
   display: grid;
   gap: 2px;
 
@@ -65,7 +66,8 @@ div.box.links, div.box.theme-configs {
   }
 }
 
-div.link, div.config {
+div.link,
+div.config {
   display: grid;
 
   grid-template-columns: repeat(3, 1fr);
@@ -93,7 +95,8 @@ input[name='display-url'] {
   border-radius: 0;
 }
 
-button.delete-link, button.delete-config {
+button.delete-link,
+button.delete-config {
   grid-column: 7/7;
 
   border-left: none;
@@ -101,7 +104,8 @@ button.delete-link, button.delete-config {
   border-bottom-left-radius: 0;
 }
 
-button.new-link, button.new-config {
+button.new-link,
+button.new-config {
   grid-column: 1/7;
 }
 
@@ -113,7 +117,7 @@ button[type='submit'] {
   grid-column: 4/7;
 }
 
-:where(button.delete-link,button.delete-config):hover {
+:where(button.delete-link, button.delete-config):hover {
   text-decoration: none;
 }
 /* edit.html END */

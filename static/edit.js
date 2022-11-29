@@ -229,8 +229,8 @@ function createThemeConfig(configKey = '', configValue = '') {
     configDivSelect.appendChild(option);
   });
 
-  configDiv.className = 'config'
-  configDivSelect.name = 'config-keys'
+  configDiv.className = 'config';
+  configDivSelect.name = 'config-keys';
 
   configDivValue.name = 'config-value';
   configDivValue.type = 'text';
