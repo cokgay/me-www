@@ -21,16 +21,24 @@ const allDisplays = [
   'Youtube',
   'Email',
 ];
+const allThemeConfigs = [
+  'backgroundUrl',
+  'backgroundColor',
+  'secondaryColor',
+  'thirdColor',
+  'foregroundColor',
+];
 
 const form = document.querySelector("form[action='/edit']");
 
 const aboutTextarea = document.querySelector("textarea[name='about']");
 const lanyardIdInput = document.querySelector("input[name='lanyard-id']");
 const themeSelect = document.querySelector("select[name='theme']");
-const themeConfig = document.querySelector("textarea[name='theme-config']");
 const addedLinksBox = document.querySelector('div.box.links');
+const themeConfigsBox = document.querySelector('div.box.theme-configs');
 
 const newLinkButton = document.querySelector("button[class='new-link']");
+const newThemeConfigButton = document.querySelector("button[class='new-config']");
 const logoutButton = document.querySelector("button[class='logout']");
 const submitButton = document.querySelector("button[type='submit']");
 
@@ -43,15 +51,14 @@ window.onload = async () => {
     aboutTextarea.textContent = userData.about ?? '';
     lanyardIdInput.value = userData.lanyardId ?? '';
     themeSelect.value = userData.theme ?? 'Classic';
-    themeConfig.value = '';
 
     for (const [key, value] of Object.entries(userData.themeOptions)) {
-      themeConfig.value += `${key}=${value}\n`;
+      themeConfigsBox.appendChild(createThemeConfig(key, value));
     }
 
-    userData.links.forEach((link) => {
+    for (const link of userData.links) {
       addedLinksBox.appendChild(createLink(link.title, link.url, link.display));
-    });
+    }
   } else {
     createToast("User doesn't exist.");
   }
@@ -61,6 +68,12 @@ newLinkButton.onclick = () => {
   if (addedLinksBox.childElementCount > 16)
     return createToast('Exceeded maximum 16 display limit.');
   addedLinksBox.appendChild(createLink());
+};
+
+newThemeConfigButton.onclick = () => {
+  if (themeConfigsBox.childElementCount > allThemeConfigs.length)
+    return createToast(`Exceeded maximum ${allThemeConfigs.length} config limit.`);
+  themeConfigsBox.appendChild(createThemeConfig());
 };
 
 logoutButton.onclick = () => {
@@ -87,9 +100,10 @@ submitButton.onclick = submitButton.onsubmit = async (b) => {
   }
 
   const keyValueConfig = {};
-  for (const line of themeConfig.value.split('\n')) {
-    const [key, value] = line.split('=');
-    keyValueConfig[key] = value;
+  for (const element of themeConfigsBox.childNodes) {
+    const linkNodes = element.childNodes;
+
+    keyValueConfig[linkNodes[0].value] = linkNodes[1].value;
   }
 
   const data = {
@@ -150,8 +164,7 @@ function createLink(displayName = '', displayURL = '', selection = 'Website') {
 
   allDisplays.forEach((d) => {
     const option = document.createElement('option');
-    option.value = d;
-    option.textContent = d;
+    option.value = option.textContent = d;
 
     if (d === selection) option.setAttribute('selected', '');
 
@@ -164,7 +177,7 @@ function createLink(displayName = '', displayURL = '', selection = 'Website') {
   linkDivDisplayName.name = 'display-title';
   linkDivDisplayName.type = 'text';
   linkDivDisplayName.placeholder = 'Display title';
-  linkDivDisplayName.value = displayName.length ? displayName : '';
+  linkDivDisplayName.value = displayName;
   linkDivDisplayName.maxLength = 16;
   linkDivDisplayName.setAttribute('required', '');
 
@@ -194,4 +207,43 @@ function createLink(displayName = '', displayURL = '', selection = 'Website') {
   linkDiv.append(linkDivSelect, linkDivDisplayName, linkDivDisplayURL, deleteButton);
 
   return linkDiv;
+}
+
+function createThemeConfig(configKey = '', configValue = '') {
+  if (configKey && typeof configKey !== 'string')
+    return console.error('Config key must be a string.');
+  if (configValue && typeof configValue !== 'string')
+    return console.error('Config value must be a string.');
+
+  const configDiv = document.createElement('div');
+  const configDivSelect = document.createElement('select');
+  const configDivValue = document.createElement('input');
+  const deleteButton = document.createElement('button');
+
+  allThemeConfigs.forEach((t) => {
+    const option = document.createElement('option');
+    option.value = option.textContent = t;
+
+    if (t === configKey) option.setAttribute('selected', '');
+
+    configDivSelect.appendChild(option);
+  });
+
+  configDiv.className = 'config'
+  configDivSelect.name = 'config-keys'
+
+  configDivValue.name = 'config-value';
+  configDivValue.type = 'text';
+  configDivValue.placeholder = 'Config Value';
+  configDivValue.value = configValue;
+  configDivValue.maxLength = 512;
+  configDivValue.setAttribute('required', '');
+
+  deleteButton.className = 'delete-config';
+  deleteButton.textContent = '✕';
+  deleteButton.onclick = ({ target }) => target.parentNode.remove();
+
+  configDiv.append(configDivSelect, configDivValue, deleteButton);
+
+  return configDiv;
 }

@@ -33,7 +33,7 @@ form[action='/edit'] {
 
 textarea[name='about'],
 textarea[name='theme-config'],
-textarea[name='theme-config'], hr {
+hr {
   grid-column: 1/7;
 }
 
@@ -45,7 +45,8 @@ select[name='theme'] {
   grid-column: 5/7;
 }
 
-div.box.links {
+div.box.links, div.box.theme-configs {
+  display: grid;
   gap: 2px;
 
   grid-column: 1/7;
@@ -59,26 +60,32 @@ div.box.links {
 }
 
 @supports not (scrollbar-width: none) {
-  div.box.links::-webkit-scrollbar {
+  :where(div.box.links, div.box.theme-configs)::-webkit-scrollbar {
     display: none;
   }
 }
 
-div.link {
+div.link, div.config {
   display: grid;
 
   grid-template-columns: repeat(3, 1fr);
   grid-column: 1/7;
 }
 
-select[name='display'] {
+select[name='display'],
+select[name='config-keys'] {
   border-right: none;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-input[name='display-title'] {
+input[name='display-title'],
+input[name='config-value'] {
   border-radius: 0;
+}
+
+input[name='config-value'] {
+  grid-column: 2/4;
 }
 
 input[name='display-url'] {
@@ -86,7 +93,7 @@ input[name='display-url'] {
   border-radius: 0;
 }
 
-button.delete-link {
+button.delete-link, button.delete-config {
   grid-column: 7/7;
 
   border-left: none;
@@ -94,7 +101,7 @@ button.delete-link {
   border-bottom-left-radius: 0;
 }
 
-button.new-link {
+button.new-link, button.new-config {
   grid-column: 1/7;
 }
 
@@ -106,7 +113,7 @@ button[type='submit'] {
   grid-column: 4/7;
 }
 
-button.delete-link:hover {
+:where(button.delete-link,button.delete-config):hover {
   text-decoration: none;
 }
 /* edit.html END */
