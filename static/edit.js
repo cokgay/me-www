@@ -39,6 +39,7 @@ const themeConfigsBox = document.querySelector('div.box.theme-configs');
 
 const newLinkButton = document.querySelector("button[class='new-link']");
 const newThemeConfigButton = document.querySelector("button[class='new-config']");
+const openProfileButton = document.querySelector("button[class='profile']");
 const logoutButton = document.querySelector("button[class='logout']");
 const submitButton = document.querySelector("button[type='submit']");
 
@@ -46,7 +47,7 @@ window.onload = async () => {
   const token = localStorage.getItem('token');
   if (!token) location.href = '/sign-in';
 
-  const userData = await getUserData(token);
+  const {username, profile: userData} = await getUserData(token);
   if (userData) {
     aboutTextarea.textContent = userData.about ?? '';
     lanyardIdInput.value = userData.lanyardId ?? '';
@@ -59,6 +60,9 @@ window.onload = async () => {
     for (const link of userData.links) {
       addedLinksBox.appendChild(createLink(link.title, link.url, link.display));
     }
+
+    openProfileButton.removeAttribute('disabled')
+    openProfileButton.onclick = () => window.open(`/@${username}`, '_blank')
   } else {
     createToast("User doesn't exist.");
   }

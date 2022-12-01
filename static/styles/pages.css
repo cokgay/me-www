@@ -109,6 +109,10 @@ button.new-config {
   grid-column: 1/7;
 }
 
+button.profile {
+  grid-column: 1/7;
+}
+
 button.logout {
   grid-column: 1/4;
 }
