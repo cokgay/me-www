@@ -47,7 +47,7 @@ window.onload = async () => {
   const token = localStorage.getItem('token');
   if (!token) location.href = '/sign-in';
 
-  const {username, profile: userData} = await getUserData(token);
+  const { username, profile: userData } = await getUserData(token);
   if (userData) {
     aboutTextarea.textContent = userData.about ?? '';
     lanyardIdInput.value = userData.lanyardId ?? '';
@@ -61,8 +61,8 @@ window.onload = async () => {
       addedLinksBox.appendChild(createLink(link.title, link.url, link.display));
     }
 
-    openProfileButton.removeAttribute('disabled')
-    openProfileButton.onclick = () => window.open(`/@${username}`, '_blank')
+    openProfileButton.removeAttribute('disabled');
+    openProfileButton.onclick = () => window.open(`/@${username}`, '_blank');
   } else {
     createToast("User doesn't exist.");
   }
