@@ -1,6 +1,6 @@
 import { createToast } from '/static/utils.js';
 
-const form = document.querySelector('form[action="/sign-in"]');
+const form = document.querySelector('form[action="/api/auth"]');
 const submitButton = document.querySelector("button[type='submit']");
 
 window.onload = () => {
