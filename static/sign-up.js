@@ -1,6 +1,6 @@
 import { createToast } from '/static/utils.js';
 
-const form = document.querySelector('form[action="/sign-up"]');
+const form = document.querySelector('form[action="/api/create"]');
 const submitButton = document.querySelector("button[type='submit']");
 const captcha = document.querySelector('div.cf-turnstile');
 const loginDirectlyCheckbox = document.querySelector('.loginDirectlyCheckbox > input');
