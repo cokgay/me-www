@@ -29,7 +29,7 @@ const allThemeConfigs = [
   'foregroundColor',
 ];
 
-const form = document.querySelector("form[action='/edit']");
+const form = document.querySelector("form[action='/api/edit']");
 
 const aboutTextarea = document.querySelector("textarea[name='about']");
 const lanyardIdInput = document.querySelector("input[name='lanyard-id']");
@@ -47,13 +47,13 @@ window.onload = async () => {
   const token = localStorage.getItem('token');
   if (!token) location.href = '/sign-in';
 
-  const { username, profile: userData } = await getUserData(token);
+  const { username, view: userData } = await getUserData(token);
   if (userData) {
     aboutTextarea.textContent = userData.about ?? '';
-    lanyardIdInput.value = userData.lanyardId ?? '';
+    lanyardIdInput.value = userData.lanyard_id ?? '';
     themeSelect.value = userData.theme ?? 'Classic';
 
-    for (const [key, value] of Object.entries(userData.themeOptions)) {
+    for (const [key, value] of Object.entries(userData.theme_options)) {
       themeConfigsBox.appendChild(createThemeConfig(key, value));
     }
 
@@ -112,9 +112,9 @@ submitButton.onclick = submitButton.onsubmit = async (b) => {
 
   const data = {
     about: aboutTextarea.value,
-    lanyardId: lanyardIdInput.value,
+    lanyard_id: lanyardIdInput.value,
     theme: themeSelect.value,
-    themeOptions: keyValueConfig,
+    theme_options: keyValueConfig,
     links,
   };
 
@@ -122,19 +122,20 @@ submitButton.onclick = submitButton.onsubmit = async (b) => {
     method: 'PATCH',
     body: JSON.stringify({
       token: localStorage.getItem('token'),
-      update: data,
+      data: data,
     }),
     headers: {
       'Content-Type': 'application/json',
     },
   });
 
-  if (result.status !== 200) {
+  if (result.status !== 204) {
     createToast(await result.text());
   } else {
     createToast('Settings saved.');
-    submitButton.removeAttribute('disabled');
   }
+
+  submitButton.removeAttribute('disabled');
 };
 
 async function getUserData(token) {
@@ -142,9 +143,7 @@ async function getUserData(token) {
   else if (typeof token !== 'string')
     return createToast('Token value is broken. Please clear website data and try again.');
 
-  const response = await fetch(`/about?token=${token}`, {
-    method: 'GET',
-  });
+  const response = await fetch(`/api/about?token=${encodeURIComponent(token)}`);
 
   if (response.status !== 200) {
     localStorage.clear();
