@@ -1,40 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  {% include "themes/components/header.html" %}
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      {% match theme_options.get("backgroundColor") %}
-      {% when Some with (color) %}
-      --background-color: {{ color }};
+  <head>
+    {% render "themes/components/header", username: username, about: about %}
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet"/>
+    <style > :root
+    {
+      {% if theme_options["backgroundColor"] %}
+        --secondary-color: {{ theme_options["backgroundColor"] }};
       {% else %}
-      --background-color: #f8f5f0;
-      {% endmatch %}
+        --background-color: #f8f5f0;
+      {% endif %}
 
-      {% match theme_options.get("secondaryColor") %}
-      {% when Some with (color) %}
-      --secondary-color: {{ color }};
+      {% if theme_options["secondaryColor"] %}
+        --secondary-color: {{ theme_options["secondaryColor"] }};
       {% else %}
-      --secondary-color: #ffffff;
-      {% endmatch %}
+        --secondary-color: #ffffff;
+      {% endif %}
 
-      {% match theme_options.get("thirdColor") %}
-      {% when Some with (color) %}
-      --third-color: {{ color }};
+      {% if theme_options["thirdColor"] %}
+        --third-color: {{ theme_options["thirdColor"] }};
       {% else %}
-      --third-color: #fff8f3;
-      {% endmatch %}
+        --third-color: #fff8f3;
+      {% endif %}
 
-      {% match theme_options.get("foregroundColor") %}
-      {% when Some with (color) %}
-      --foreground-color: {{ color }};
+      {% if theme_options["foregroundColor"] %}
+        --foreground-color: {{ theme_options["foregroundColor"] }};
       {% else %}
-      --foreground-color: #24201c;
-      {% endmatch %}
+        --foreground-color: #24201c;
+      {% endif %}
     }
 
     html,
@@ -96,7 +92,7 @@
     #box #flex a {
       width: 40%;
       margin: 5px;
-      padding: 5px 10px 5px 10px;
+      padding: 5px 10px;
 
       background: var(--third-color);
       border: 2px dashed var(--background-color);
@@ -113,15 +109,14 @@
       width: 32px;
       height: 32px;
       object-fit: cover;
-      margin: 5px;
-      margin-right: 10px;
+      margin: 5px 10px 5px 5px;
     }
 
     #box #flex a:hover {
       text-decoration: underline;
     }
 
-    @media (max-width: 640px) {
+    @media(max-width: 640px) {
 
       html,
       body {
@@ -134,7 +129,7 @@
         width: 100%;
         box-sizing: border-box;
         border: none;
-        border-radius: 0px;
+        border-radius: 0;
       }
 
       #box h1 {
@@ -154,36 +149,37 @@
         width: 100%;
       }
     }
-
   </style>
 </head>
 
 <body>
   <div id="box">
-    <img id="avatar" src="" alt="avatar" />
+    <img id="avatar" src="" alt="avatar"/>
     <h1>{{ username }}</h1>
     <p>{{ about }}</p>
     <div id="flex">
       {% for link in links %}
-      <a href="{{ link.url }}">
-        <img src="/static/icons/{{ link.display|lower }}.svg" alt="{{ link.title }}" />
-        {{ link.title }}
-      </a>
+        <a href="{{ link.url }}">
+          <img src="/static/icons/{{ link.display|downcase }}.svg" alt="{{ link.title }}"/>
+          {{ link.title }}
+        </a>
       {% endfor %}
     </div>
   </div>
   <script src="/static/lanyard.js"></script>
   <script>
-    initializeLanyard('{{ lanyard_id }}', async (id, { discord_user, discord_status }) => {
+    initializeLanyard('{{ lanyard_id }}', async (id, {discord_user, discord_status}) => {
       const styles = {
         online: '#30d158',
         offline: '#cccccc',
         idle: '#ffbd2f',
-        dnd: '#ff3640',
+        dnd: '#ff3640'
       };
 
-      const { username, discriminator, avatar } = discord_user;
-      const format = avatar.startsWith('a_') ? 'gif' : 'webp';
+      const {username, discriminator, avatar} = discord_user;
+      const format = avatar.startsWith('a_')
+        ? 'gif'
+        : 'webp';
 
       let avatarElement = document.getElementById('avatar');
 
@@ -192,6 +188,4 @@
       avatarElement.style.borderColor = styles[discord_status];
     });
   </script>
-</body>
-
-</html>
+</body></html>

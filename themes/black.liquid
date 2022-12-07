@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  {% include "themes/components/header.html" %}
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap"
-    rel="stylesheet" />
-  <style>
-    :root {
-      {% match theme_options.get("backgroundColor") %}
-      {% when Some with (color) %}
-      --background-color: {{ color }};
+  <head>
+    {% render "themes/components/header", username: username, about: about %}
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <style > :root
+    {
+      {% if theme_options["backgroundColor"] %}
+        --background-color: {{ theme_options["backgroundColor"] }};
       {% else %}
-      --background-color: #000000;
-      {% endmatch %}
+        --background-color: #000000;
+      {% endif %}
 
-      {% match theme_options.get("foregroundColor") %}
-      {% when Some with (color) %}
-      --foreground-color: {{ color }};
+      {% if theme_options["foregroundColor"] %}
+        --foreground-color: {{ theme_options["foregroundColor"] }};
       {% else %}
-      --foreground-color: #ffffff;
-      {% endmatch %}
+        --foreground-color: #ffffff;
+      {% endif %}
     }
 
     html,
@@ -78,7 +75,7 @@
       height: 32px;
     }
 
-    @media (max-width: 640px) {
+    @media(max-width: 640px) {
       #box {
         width: 100%;
       }
@@ -96,35 +93,36 @@
         height: 96px;
       }
     }
-
   </style>
 </head>
 
 <body>
   <div id="box">
-    <img id="avatar" src="" alt="avatar" />
+    <img id="avatar" src="" alt="avatar"/>
     <h1>{{ username }}</h1>
     <p>{{ about }}</p>
     <div id="flex">
       {% for link in links %}
-      <a href="{{ link.url }}">
-        <img src="/static/icons/{{ link.display|lower }}.svg" alt="{{ link.title }}" />
-      </a>
+        <a href="{{ link.url }}">
+          <img src="/static/icons/{{ link.display|downcase }}.svg" alt="{{ link.title }}"/>
+        </a>
       {% endfor %}
     </div>
   </div>
   <script src="/static/lanyard.js"></script>
   <script>
-    initializeLanyard('{{ lanyard_id }}', async (id, { discord_user, discord_status }) => {
+    initializeLanyard('{{ lanyard_id }}', async (id, {discord_user, discord_status}) => {
       const styles = {
         online: '#00ff00',
         offline: '#cccccc',
         idle: '#ffbd2f',
-        dnd: '#ff3640',
+        dnd: '#ff3640'
       };
 
-      const { username, discriminator, avatar } = discord_user;
-      const format = avatar.startsWith('a_') ? 'gif' : 'webp';
+      const {username, discriminator, avatar} = discord_user;
+      const format = avatar.startsWith('a_')
+        ? 'gif'
+        : 'webp';
 
       let avatarElement = document.getElementById('avatar');
 
@@ -133,6 +131,4 @@
       avatarElement.style.borderColor = styles[discord_status];
     });
   </script>
-</body>
-
-</html>
+</body></html>

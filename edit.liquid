@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%= File.read!("www/header.html") %>
+    {% render "header" %}
     <script src="/static/edit.js" type="module" defer></script>
   </head>
 
@@ -10,16 +10,9 @@
       <div class="box centered">
         <h1>Edit profile</h1>
         <form action="/api/edit">
-          <hr />
+          <hr/>
           <textarea name="about" placeholder="Introduce yourself!" maxlength="512"></textarea>
-          <input
-            type="text"
-            name="lanyard-id"
-            title="Id must be a number."
-            placeholder="Discord Id for Lanyard Data."
-            pattern="[0-9]+"
-            minlength="17"
-          />
+          <input type="text" name="lanyard-id" title="Id must be a number." placeholder="Discord Id for Lanyard Data." pattern="[0-9]+" minlength="17"/>
           <select name="theme">
             <option value="ArtBox">ArtBox</option>
             <option value="Black">Black</option>
@@ -30,7 +23,7 @@
           <button type="button" class="new-link">Add New Link</button>
           <div class="box theme-configs"></div>
           <button type="button" class="new-config">Add Theme Config</button>
-          <hr />
+          <hr/>
           <button type="button" class="profile" disabled>Display profile</button>
           <button type="button" class="logout">Log Out</button>
           <button type="submit">Save Settings</button>

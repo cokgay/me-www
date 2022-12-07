@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  {% include "themes/components/header.html" %}
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap"
-    rel="stylesheet" />
-  <style>
-    :root {
-      {% match theme_options.get("backgroundUrl") %}
-      {% when Some with (url) %}
-      --background-url: url({{ url }});
+  <head>
+    {% render "themes/components/header", username: username, about: about %}
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <style > :root
+    {
+      {% if theme_options["backgroundUrl"] %}
+        --background-url: url('{{ theme_options["backgroundUrl"] }}');
       {% else %}
-      --background-url: url(https://cdna.artstation.com/p/assets/images/images/056/297/656/large/brock-grossman-dragon-13.jpg);
-      {% endmatch %}
+        --background-url: url('https://cdna.artstation.com/p/assets/images/images/056/297/656/large/brock-grossman-dragon-13.jpg');
+      {% endif %}
 
-      {% match theme_options.get("secondaryColor") %}
-      {% when Some with (color) %}
-      --secondary-color: {{ color }};
+      {% if theme_options["secondaryColor"] %}
+        --secondary-color: {{ theme_options["secondaryColor"] }};
       {% else %}
-      --secondary-color: #09ff84be;
-      {% endmatch %}
+        --secondary-color: #09ff84be;
+      {% endif %}
     }
 
     html,
@@ -55,7 +52,7 @@
       width: 640px;
       padding: 10px;
 
-      box-shadow: var(--secondary-color) 0px 16px 48px;
+      box-shadow: var(--secondary-color) 0 16px 48px;
     }
 
     #box #upper {
@@ -74,8 +71,7 @@
     #box #upper a {
       display: block;
       color: #fff;
-      margin: 0;
-      margin-top: 5px;
+      margin: 5px 0 0;
       font-size: 24px;
       font-weight: 700;
     }
@@ -101,13 +97,11 @@
 
     #box #flex #left h1,
     #box #flex #left p {
-      padding: 5px 10px 5px 10px;
+      padding: 5px 10px;
       background: #000;
       color: #fff;
-      margin: 5px;
-      margin-left: 0px;
+      margin: 0 5px 5px 0;
       word-wrap: break-word;
-      margin-top: 0;
     }
 
     #box #flex #left p {
@@ -170,7 +164,8 @@
       filter: invert(17%) sepia(30%) saturate(5563%) hue-rotate(190deg) brightness(94%) contrast(102%);
     }
 
-    .Website, .Email {
+    .Website,
+    .Email {
       background: #fff;
       color: #000;
     }
@@ -256,7 +251,7 @@
       color: #fff;
     }
 
-    @media (max-width: 800px) {
+    @media(max-width: 800px) {
       #box {
         width: 100%;
         box-shadow: none;
@@ -307,17 +302,16 @@
 
     *::-webkit-scrollbar-thumb {
       background-color: #000;
-      border-radius: 0px;
+      border-radius: 0;
       border: 2px solid var(--secondary-color);
     }
-
   </style>
 </head>
 
 <body>
   <div id="box">
     <div id="upper">
-      <img src="" alt="avatar" id="avatar" />
+      <img src="" alt="avatar" id="avatar"/>
       <a id="username" href="">username#0000</a>
     </div>
     <div id="flex">
@@ -327,26 +321,28 @@
       </div>
       <div id="right">
         {% for link in links %}
-        <a href="{{ link.url }}" class="{{ link.display }}">
-          <img src="/static/icons/{{ link.display|lower }}.svg" alt="{{ link.title }}" />
-          {{ link.title }}
-        </a>
+          <a href="{{ link.url }}" class="{{ link.display }}">
+            <img src="/static/icons/{{ link.display|downcase }}.svg" alt="{{ link.title }}"/>
+            {{ link.title }}
+          </a>
         {% endfor %}
       </div>
     </div>
   </div>
   <script src="/static/lanyard.js"></script>
   <script>
-    initializeLanyard('{{ lanyard_id }}', async (id, { discord_user, discord_status }) => {
+    initializeLanyard('{{ lanyard_id }}', async (id, {discord_user, discord_status}) => {
       const styles = {
         online: '#36be1b',
         offline: '#cccccc',
         idle: '#ffbd2f',
-        dnd: '#ff3640',
+        dnd: '#ff3640'
       };
 
-      const { username, discriminator, avatar } = discord_user;
-      const format = avatar.startsWith('a_') ? 'gif' : 'webp';
+      const {username, discriminator, avatar} = discord_user;
+      const format = avatar.startsWith('a_')
+        ? 'gif'
+        : 'webp';
 
       let usernameElement = document.getElementById('username');
       let avatarElement = document.getElementById('avatar');
@@ -361,6 +357,4 @@
       usernameElement.href = `https://discord.com/users/${id}`;
     });
   </script>
-</body>
-
-</html>
+</body></html>

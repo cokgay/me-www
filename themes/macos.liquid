@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  {% include "themes/components/header.html" %}
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap"
-    rel="stylesheet" />
-  <style>
-    :root {
-      {% match theme_options.get("backgroundUrl") %}
-      {% when Some with (url) %}
-      --background-url: url({{ url }});
+  <head>
+    {% render "themes/components/header", username: username, about: about %}
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <style > :root
+    {
+      {% if theme_options["backgroundUrl"] %}
+        --background-url: url('{{ theme_options["backgroundUrl"] }}');
       {% else %}
-      --background-url: url(https://4kwallpapers.com/images/wallpapers/macos-ventura-macos-13-macos-2022-stock-dark-mode-5k-retina-5120x2880-8133.jpg);
-      {% endmatch %}
+        --background-url: url('https://4kwallpapers.com/images/wallpapers/macos-ventura-macos-13-macos-2022-stock-dark-mode-5k-retina-5120x2880-8133.jpg');
+      {% endif %}
     }
 
     html,
@@ -87,8 +85,7 @@
       backdrop-filter: blur(40px);
 
       background: #0e0e0e2f;
-      box-shadow: #00000071 0px 50px 100px -20px, #000000bb 0px 30px 60px -30px,
-        #00000052 0px 0px 0px 2px, #c9c9c9c4 0px 0px 0px 1px;
+      box-shadow: #00000071 0 50px 100px -20px, #000000bb 0 30px 60px -30px, #00000052 0 0 0 2px, #c9c9c9c4 0 0 0 1px;
     }
 
     #window #upper {
@@ -122,7 +119,7 @@
 
       width: 100%;
       max-height: 512px;
-      padding: 20px 40px 20px 40px;
+      padding: 20px 40px;
     }
 
     #window #bottom #avatar {
@@ -170,7 +167,7 @@
 
     #window #bottom #user #links a {
       display: block;
-      margin: 5px 10px 5px 0px;
+      margin: 5px 10px 5px 0;
     }
 
     #window #bottom #user #links a img {
@@ -180,7 +177,7 @@
       height: 24px;
     }
 
-    @media (max-width: 900px) {
+    @media(max-width: 900px) {
 
       html,
       body {
@@ -237,7 +234,6 @@
       background-color: #c9c9c9c4;
       border-radius: 20px;
     }
-
   </style>
 </head>
 
@@ -246,8 +242,7 @@
     <div>
       <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <title>Apple</title>
-        <path
-          d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701" />
+        <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/>
       </svg>
       <h1>{{ username }}</h1>
     </div>
@@ -260,15 +255,15 @@
       <div></div>
     </div>
     <div id="bottom">
-      <img src="" alt="avatar" id="avatar" />
+      <img src="" alt="avatar" id="avatar"/>
       <div id="user">
         <h1>{{ username }}</h1>
         <p>{{ about }}</p>
         <div id="links">
           {% for link in links %}
-          <a href="{{ link.url }}" class="{{ link.display }}" title="{{ link.title }}">
-            <img src="/static/icons/{{ link.display|lower }}.svg" alt="{{ link.title }}" />
-          </a>
+            <a href="{{ link.url }}" class="{{ link.display }}" title="{{ link.title }}">
+              <img src="/static/icons/{{ link.display|downcase }}.svg" alt="{{ link.title }}"/>
+            </a>
           {% endfor %}
         </div>
       </div>
@@ -282,8 +277,12 @@
     dateElem.innerText = new Date().toDateString();
 
     const centerWindow = () => {
-      macWindow.style.left = `${window.innerWidth / 2 - macWindow.offsetWidth / 2}px`;
-      macWindow.style.top = `${window.innerHeight / 2 - macWindow.offsetHeight / 2}px`;
+      macWindow.style.left = `${
+        window.innerWidth / 2 - macWindow.offsetWidth / 2
+      }px`;
+      macWindow.style.top = `${
+        window.innerHeight / 2 - macWindow.offsetHeight / 2
+      }px`;
     };
 
     const dragElement = () => {
@@ -317,16 +316,18 @@
       };
     };
 
-    initializeLanyard('{{ lanyard_id }}', async (id, { discord_user, discord_status }) => {
+    initializeLanyard('{{ lanyard_id }}', async (id, {discord_user, discord_status}) => {
       const styles = {
         online: '#30d158',
         offline: '#8e8e93',
         idle: '#ffd60a',
-        dnd: '#ff453a',
+        dnd: '#ff453a'
       };
 
-      const { avatar } = discord_user;
-      const format = avatar.startsWith('a_') ? 'gif' : 'webp';
+      const {avatar} = discord_user;
+      const format = avatar.startsWith('a_')
+        ? 'gif'
+        : 'webp';
 
       let avatarElement = document.getElementById('avatar');
 
@@ -342,6 +343,4 @@
       centerWindow();
     }
   </script>
-</body>
-
-</html>
+</body></html>
